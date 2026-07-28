@@ -1,0 +1,49 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: pradeep-portfolio-web # must match infra/main.bicep namePrefix + "-web"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint, type check, and test
+        run: |
+          npm run lint
+          npm run typecheck
+          npm run test
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net
+
+      - name: Apply pending database migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      # The CI build above is a fail-fast gate. App Service's Oryx builder
+      # (SCM_DO_BUILD_DURING_DEPLOYMENT=true, set in infra/main.bicep) reruns
+      # `npm install && npm run build` server-side from the deployed source.
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
