@@ -14,7 +14,6 @@ export function ThemeToggle() {
     // localStorage/matchMedia); rendering a placeholder until then avoids an
     // SSR/client hydration mismatch. This one-time flip is the documented
     // pattern, not a synchronization loop.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

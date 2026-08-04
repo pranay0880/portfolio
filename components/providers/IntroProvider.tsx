@@ -85,7 +85,6 @@ export function IntroProvider({ children }: { children: React.ReactNode }) {
     }
 
     const rect = logoEl.getBoundingClientRect();
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time DOM measurement at mount, not a prop/state sync
     setTarget({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
     setStage("tag");
     setIntroReady(true);

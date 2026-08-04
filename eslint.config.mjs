@@ -9,6 +9,10 @@ const eslintConfig = defineConfig([
   // eslint-config-next already registers the jsx-a11y plugin; only merge its
   // recommended rules in, rather than re-registering the plugin itself.
   { rules: jsxA11y.flatConfigs.recommended.rules },
+  // One-time mount-effect state initialization (DOM measurement, reduced-motion
+  // checks, etc.) is a legitimate pattern, not a prop/state sync that risks
+  // cascading renders — disable repo-wide rather than per call site.
+  { rules: { "react-hooks/set-state-in-effect": "off" } },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
