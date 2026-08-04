@@ -14,7 +14,6 @@ const { Hero } = await import("@/components/sections/Hero");
 describe("Hero", () => {
   it("renders the profile name and tagline", () => {
     render(<Hero />);
-
     expect(screen.getByRole("heading", { name: profile.name })).toBeInTheDocument();
     expect(screen.getByText(profile.tagline)).toBeInTheDocument();
   });

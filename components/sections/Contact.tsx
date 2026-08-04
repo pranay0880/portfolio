@@ -8,7 +8,8 @@ import { CheckCircle2, Loader2, Mail, XCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
+import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { profile } from "@/lib/content";
 import { contactFormSchema, type ContactFormValues } from "@/lib/validation";
 import { fadeUp, viewportOnce } from "@/lib/motion";
@@ -61,21 +62,76 @@ export function Contact() {
         <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
           <SectionHeading
             eyebrow="Portal"
-            title="Step through. Let's build something"
-            description="Have a project in mind or just want to say hi? Fill out the form and I'll get back to you."
+            title="Open a Portal. Let's Build."
+            description="Have a project, idea, or opportunity in mind? Send a message and let's start a conversation."
           />
 
           <div className="grid gap-8 md:grid-cols-[2fr_3fr]">
             <Card className="flex flex-col justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Direct contact</h3>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="mt-3 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-                >
-                  <Mail size={16} />
-                  {profile.email}
-                </a>
+                <p className="text-sm font-medium tracking-wide text-primary uppercase">
+                  Direct Contact
+                </p>
+
+                <div className="mt-5 space-y-4">
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="group flex items-start gap-3"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                      <Mail size={16} />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-medium text-foreground">Email</span>
+                      <span className="block text-sm text-muted-foreground">{profile.email}</span>
+                    </span>
+                  </a>
+
+                  <a
+                    href={profile.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start gap-3"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                      <LinkedinIcon size={16} />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-medium text-foreground">LinkedIn</span>
+                      <span className="block text-sm text-muted-foreground">
+                        Connect with me
+                      </span>
+                    </span>
+                  </a>
+
+                  <a
+                    href={profile.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start gap-3"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                      <GithubIcon size={16} />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-medium text-foreground">GitHub</span>
+                      <span className="block text-sm text-muted-foreground">Explore my work</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-border pt-4">
+                <p className="text-sm font-medium tracking-wide text-primary uppercase">
+                  Current Status
+                </p>
+                <p className="mt-2 flex items-center gap-2 text-sm text-foreground">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  </span>
+                  Open to opportunities
+                </p>
               </div>
             </Card>
 
@@ -155,12 +211,17 @@ export function Contact() {
                   />
                 </div>
 
-                <Button type="submit" disabled={submitState === "submitting"}>
+                <DrawOutlineButton
+                  as="button"
+                  type="submit"
+                  disabled={submitState === "submitting"}
+                  className="disabled:cursor-not-allowed disabled:opacity-50"
+                >
                   {submitState === "submitting" ? (
                     <Loader2 size={16} className="animate-spin" />
                   ) : null}
                   Send message
-                </Button>
+                </DrawOutlineButton>
 
                 {submitState === "success" ? (
                   <p className="flex items-center gap-2 text-sm text-emerald-500">

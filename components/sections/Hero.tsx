@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, FileText } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
 import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
 import { profile } from "@/lib/content";
 import { fadeUp, staggerChildren } from "@/lib/motion";
@@ -37,12 +36,6 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-4 flex flex-wrap items-center gap-3">
-            {profile.resumeUrl ? (
-              <Button as="a" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
-                <FileText size={16} />
-                Resume
-              </Button>
-            ) : null}
             <DrawOutlineButton as="a" href="#contact" onClick={handleAnchorClick("contact")}>
               Get in touch
               <ArrowDown size={16} />

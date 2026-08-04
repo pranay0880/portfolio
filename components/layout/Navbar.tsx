@@ -13,8 +13,8 @@ import { useIntro } from "@/components/providers/IntroProvider";
 const NAV_LINKS = [
   { id: "about", label: "Character" },
   { id: "skills", label: "Abilities" },
-  { id: "experience", label: "Experience" },
   { id: "projects", label: "Missions" },
+    { id: "experience", label: "Experience" },
   { id: "contact", label: "Portal" },
 ];
 
