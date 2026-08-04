@@ -79,6 +79,9 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
       appSettings: [
         { name: 'WEBSITE_NODE_DEFAULT_VERSION', value: '~20' }
         { name: 'SCM_DO_BUILD_DURING_DEPLOYMENT', value: 'true' }
+        // Oryx defaults to a production-only npm install, but tailwindcss/typescript
+        // etc. are devDependencies required to run `next build`.
+        { name: 'NPM_CONFIG_PRODUCTION', value: 'false' }
         { name: 'NODE_ENV', value: 'production' }
         { name: 'PORT', value: '8080' }
         { name: 'DATABASE_URL', value: 'REPLACE_ME' }
