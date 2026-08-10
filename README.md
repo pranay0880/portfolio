@@ -11,7 +11,6 @@ A production-ready personal portfolio built with Next.js (App Router), TypeScrip
 - **Database:** PostgreSQL via Prisma 7 (driver adapter: `@prisma/adapter-pg`)
 - **Email:** Resend + React Email
 - **Monitoring:** Azure Application Insights (`applicationinsights` Node SDK, via `instrumentation.ts`)
-- **Tests:** Vitest + React Testing Library
 - **Deployment:** Azure App Service (Linux/Node) + Azure Database for PostgreSQL Flexible Server, provisioned via Bicep
 
 ## Getting started
@@ -40,16 +39,7 @@ Copy `.env.example` to `.env` and fill in the values:
 
 ### 3. Local database
 
-Two options:
-
-**Docker (recommended if you have it installed):**
-
-```bash
-docker compose up -d
-npx prisma migrate deploy
-```
-
-**No Docker — use Prisma's built-in local dev database:**
+Use Prisma's built-in local dev database:
 
 ```bash
 npx prisma dev -d
@@ -59,7 +49,7 @@ npx prisma db push
 
 > Important: the app connects via `@prisma/adapter-pg` (a plain `pg` driver), which needs a **standard `postgres://` connection string** — use the `TCP` URL printed by `prisma dev ls`, not the `prisma+postgres://...api_key=...` proxy URL (that one is only understood by Prisma's own query engine, and silently fails/disconnects when handed to `pg`). This tripped up local verification during development until traced down — see `git log` / the `lib/db.ts` comment if this resurfaces.
 >
-> Also on this machine, `npx prisma migrate dev` (which needs a shadow database) was unreliable against Prisma's embedded dev-Postgres — `prisma db push` was used instead to verify the schema end-to-end, and the versioned migration in `prisma/migrations/` was authored via `prisma migrate diff`. Against a real Postgres (Docker, or Azure Flexible Server), `prisma migrate dev` / `prisma migrate deploy` should work normally.
+> Also on this machine, `npx prisma migrate dev` (which needs a shadow database) was unreliable against Prisma's embedded dev-Postgres — `prisma db push` was used instead to verify the schema end-to-end, and the versioned migration in `prisma/migrations/` was authored via `prisma migrate diff`. Against a real Postgres (Azure Flexible Server), `prisma migrate dev` / `prisma migrate deploy` should work normally.
 
 ### 4. Run the app
 
@@ -78,7 +68,6 @@ Visit `http://localhost:3000`.
 | `npm run start` | Start the production server (binds to `$PORT`, defaults to 8080) |
 | `npm run lint` | ESLint (Next.js core-web-vitals + TypeScript + jsx-a11y) |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run test` | Vitest |
 | `npm run format` / `format:check` | Prettier (with Tailwind class sorting) |
 
 ## Content
@@ -123,7 +112,7 @@ Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App
    - `AZURE_WEBAPP_PUBLISH_PROFILE` — download from the Web App's "Get publish profile" in the Azure Portal
    - `DATABASE_URL` — same connection string as above, used to run `prisma migrate deploy` before each deploy
 
-4. Push to `main` — CI runs lint/typecheck/test/build, then the deploy workflow applies pending migrations and deploys to App Service.
+4. Push to `main` — CI runs a build, then the deploy workflow applies pending migrations and deploys to App Service.
 
 ### Explicitly out of scope for this pass
 

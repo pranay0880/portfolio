@@ -159,7 +159,7 @@ export function Experience() {
               >
                 <ChevronDown size={14} className="text-primary" />
               </motion.span>
-              <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+              <p className="font-mono text-xs font-semibold tracking-wide text-primary uppercase">
                 {currentlyBuilding.label}
               </p>
             </div>

@@ -8,10 +8,9 @@ export const profile = {
   summary:
     "3 years of experience working across React, Next.js, and Node.js — taking features from interface to database without losing sight of how they hold up in production. Away from the keyboard, usually watching anime, drawn to the same craftsmanship that goes into a well-built feature.",
   bio: [
-    "Every developer has a story. Mine began with curiosity and evolved into building products that solve real problems.",
-    "I'm a Full Stack Developer based in India with 3+ years of experience delivering production-grade web applications. From responsive interfaces built with React, Next.js, and TypeScript to scalable backend services powered by Node.js and PostgreSQL, I enjoy building systems that are reliable from end to end.",
-    "Beyond writing features, I focus on architecture that lasts—designing modular frontends, improving maintainability, and building AI-powered experiences that make products more accessible across languages and regions.",
-    "For me, good software isn't just about how it looks. It's about how it performs, scales, and continues to deliver value long after it's shipped.",
+    "My story started with curiosity about how things work, and turned into a habit of building products that solve real problems.",
+    "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend—with a focus on architecture that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
+    "I've also built AI-powered features that make products more accessible across languages and regions, and taken on mentoring junior developers as I've grown into ownership of larger pieces of the systems I work on.",
   ],
   location: "India",
   email: "pranay0880@gmail.com",
@@ -34,7 +33,7 @@ export type CharacterStat = {
 export const characterStats: CharacterStat[] = [
   { label: "Experience", subtitle: "Where I've worked", value: "3+", unit: "Years", icon: Clock },
   { label: "Projects", subtitle: "What I've built", value: "10+", unit: "Builds", icon: Layers },
-  { label: "Beyond Code", subtitle: "What inspires me", value: "Anime", icon: Sparkles },
+  { label: "Beyond Code", subtitle: "What inspires me", value: "Anime × Code", icon: Sparkles },
 ];
 
 export type TechCategory = {

@@ -13,9 +13,9 @@ import { useIntro } from "@/components/providers/IntroProvider";
 const NAV_LINKS = [
   { id: "about", label: "Character" },
   { id: "skills", label: "Abilities" },
-  { id: "projects", label: "Missions" },
+  { id: "projects", label: "Projects" },
     { id: "experience", label: "Experience" },
-  { id: "contact", label: "Portal" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -77,7 +77,7 @@ export function Navbar() {
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={handleAnchorClick(link.id)}
-                className={`group relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`group relative rounded-full px-4 py-2 font-mono text-sm font-medium transition-colors ${
                   isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
                 aria-current={isActive ? "true" : undefined}
@@ -127,7 +127,7 @@ export function Navbar() {
                   handleAnchorClick(link.id)(event);
                   setMenuOpen(false);
                 }}
-                className={`rounded-lg px-3 py-2 text-sm font-medium ${
+                className={`rounded-lg px-3 py-2 font-mono text-sm font-medium ${
                   activeId === link.id ? "text-foreground" : "text-muted-foreground"
                 }`}
               >

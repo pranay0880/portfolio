@@ -11,7 +11,9 @@ export function Footer() {
       <Container className="py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-medium tracking-wide text-primary uppercase">Save Point</p>
+            <p className="font-mono text-sm font-medium tracking-wide text-primary uppercase">
+              Save Point
+            </p>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">{profile.tagline}</p>
           </div>
 

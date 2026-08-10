@@ -75,7 +75,7 @@ function StickyNote({
   return (
     <motion.div
       variants={fadeUp}
-      className={`relative w-[85%] shrink-0 snap-start sm:w-auto ${layout.offset}`}
+      className={`relative w-full sm:w-auto ${layout.offset}`}
       style={{ zIndex: index + 1 }}
     >
       {layout.pin === "pin" ? <Pin /> : <Tape />}
@@ -167,7 +167,7 @@ export function Skills() {
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerChildren}
-            className="relative -mx-4 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pt-3 pb-4 sm:mx-0 sm:flex-wrap sm:gap-x-4 sm:gap-y-2 sm:overflow-visible sm:px-2 sm:pb-6"
+            className="relative flex flex-col gap-8 pt-3 pb-4 sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2 sm:px-2 sm:pb-6"
           >
             {techStack.map((entry, index) => (
               <StickyNote key={entry.category} {...entry} index={index} />

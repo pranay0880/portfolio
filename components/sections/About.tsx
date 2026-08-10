@@ -15,7 +15,7 @@ export function About() {
       <Container>
         <SectionHeading eyebrow="Character Arc" title="Behind the Code" />
 
-        <div className="grid gap-10 md:grid-cols-[3fr_2fr]">
+        <div className="grid gap-10 md:grid-cols-[3fr_2fr] md:gap-16">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -44,7 +44,7 @@ export function About() {
                 </DrawOutlineButton>
               ) : null}
               <DrawOutlineButton as="a" href="#projects" onClick={handleAnchorClick("projects")}>
-                View Missions
+                View Projects
                 <ArrowRight size={16} />
               </DrawOutlineButton>
             </motion.div>
@@ -55,24 +55,23 @@ export function About() {
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerChildren}
-            className="space-y-3"
+            className="order-first max-w-xs space-y-2 md:order-none"
           >
             {characterStats.map((item) => (
               <motion.div
                 key={item.label}
                 variants={fadeUp}
-                className="group border rounded-lg border-border bg-surface p-2 hover:border-primary/50 hover:shadow-lg"
+                className="group border border-border p-2 hover:border-primary/50 hover:shadow-lg"
               >
-
                 <div className="relative flex items-center justify-between">
-                  <p className="relative mt-3 text-sm text-muted-foreground">{item.subtitle}</p>
+                  <p className="relative text-sm text-muted-foreground">{item.subtitle}</p>
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <item.icon size={12} />
                   </span>
                 </div>
-                
-                <p className="relative mt-2 text-3xl font-bold text-foreground">
-                  <span className="text-primary">{item.value}</span>
+
+                <p className="relative mt-1 text-2xl font-bold text-foreground">
+                  <span className="font-mono text-primary">{item.value}</span>
                   {item.unit ? <> {item.unit}</> : null}
                 </p>
               </motion.div>

@@ -13,7 +13,7 @@ export function Projects() {
   return (
     <section id="projects" className="scroll-mt-16 py-16 sm:py-24">
       <Container>
-        <SectionHeading eyebrow="Missions" title="Things I've built" />
+        <SectionHeading eyebrow="Projects" title="Things I've built" />
       </Container>
 
       <div className="border-t border-border">
@@ -67,28 +67,30 @@ export function Projects() {
                   </DrawOutlineButton>
                 </div>
 
-                <div className="relative flex items-start justify-center sm:justify-end">
-                  {project.badge ? (
-                    <span className="absolute top-0 right-6 -rotate-6 rounded-md border-2 border-primary px-3 py-1 text-xs font-bold tracking-widest text-primary uppercase sm:right-16">
-                      {project.badge}
-                    </span>
-                  ) : null}
+                <div className="relative flex min-h-60 items-start justify-center sm:min-h-72 sm:justify-end">
+                  <div className="relative w-56">
+                    {project.badge ? (
+                      <span className="absolute top-0 right-0 -rotate-6 rounded-md border-2 border-primary px-3 py-1 font-mono text-xs font-bold tracking-widest text-primary uppercase">
+                        {project.badge}
+                      </span>
+                    ) : null}
 
-                  {project.image ? (
-                    <div className="relative mt-14 h-40 w-56 -rotate-3 overflow-hidden rounded-sm border-4 border-white shadow-[3px_6px_14px_rgba(0,0,0,0.25)] sm:mt-16 sm:mr-10">
-                      <Image
-                        src={project.image}
-                        alt={`${project.title} screenshot`}
-                        fill
-                        sizes="224px"
-                        className="object-cover"
-                      />
+                    {project.image ? (
+                      <div className="relative mt-14 h-40 w-56 -rotate-3 overflow-hidden rounded-sm border-4 border-white shadow-[3px_6px_14px_rgba(0,0,0,0.25)] sm:mt-16">
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} screenshot`}
+                          fill
+                          sizes="224px"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : null}
+
+                    <div className="absolute top-24 right-0 w-52 rotate-2 rounded-sm border border-black/10 bg-[#f3dd8c] p-4 text-black/80 shadow-[2px_4px_10px_rgba(0,0,0,0.2)] sm:top-32">
+                      <span className="pointer-events-none absolute right-0 bottom-0 h-5 w-5 bg-black/15 [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
+                      <p className="text-sm leading-snug italic">&ldquo;{project.quote}&rdquo;</p>
                     </div>
-                  ) : null}
-
-                  <div className="absolute top-24 right-0 w-52 rotate-2 rounded-sm border border-black/10 bg-[#f3dd8c] p-4 text-black/80 shadow-[2px_4px_10px_rgba(0,0,0,0.2)] sm:top-32">
-                    <span className="pointer-events-none absolute right-0 bottom-0 h-5 w-5 bg-black/15 [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
-                    <p className="text-sm leading-snug italic">&ldquo;{project.quote}&rdquo;</p>
                   </div>
                 </div>
               </div>

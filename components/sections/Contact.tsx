@@ -61,7 +61,7 @@ export function Contact() {
       <Container>
         <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
           <SectionHeading
-            eyebrow="Portal"
+            eyebrow="Contact"
             title="Open a Portal. Let's Build."
             description="Have a project, idea, or opportunity in mind? Send a message and let's start a conversation."
           />
@@ -69,7 +69,7 @@ export function Contact() {
           <div className="grid gap-8 md:grid-cols-[2fr_3fr]">
             <Card className="flex flex-col justify-between">
               <div>
-                <p className="text-sm font-medium tracking-wide text-primary uppercase">
+                <p className="font-mono text-sm font-medium tracking-wide text-primary uppercase">
                   Direct Contact
                 </p>
 
@@ -122,7 +122,7 @@ export function Contact() {
               </div>
 
               <div className="mt-8 border-t border-border pt-4">
-                <p className="text-sm font-medium tracking-wide text-primary uppercase">
+                <p className="font-mono text-sm font-medium tracking-wide text-primary uppercase">
                   Current Status
                 </p>
                 <p className="mt-2 flex items-center gap-2 text-sm text-foreground">
