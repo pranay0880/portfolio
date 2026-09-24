@@ -3,7 +3,6 @@ import { prisma } from "@/lib/db";
 import { contactFormSchema } from "@/lib/validation";
 import { isRateLimited } from "@/lib/rate-limit";
 import { sendContactNotification } from "@/lib/email";
-import { trackEvent, trackException } from "@/lib/monitoring";
 
 export const runtime = "nodejs";
 
@@ -56,13 +55,11 @@ export async function POST(request: NextRequest) {
       where: { id: submission.id },
       data: { status: "EMAIL_SENT" },
     });
-    await trackEvent("contact_form_submitted", { submissionId: submission.id });
-  } catch (error) {
+  } catch {
     await prisma.contactSubmission.update({
       where: { id: submission.id },
       data: { status: "EMAIL_FAILED" },
     });
-    await trackException(error, { submissionId: submission.id });
 
     return NextResponse.json(
       {

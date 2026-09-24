@@ -1,6 +1,6 @@
 # Pradeep Dasari — Portfolio
 
-A production-ready personal portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS. The contact form is backed by a real API route, PostgreSQL (via Prisma), and Resend for email delivery, with Application Insights wired in for monitoring. Deployment target is Azure App Service.
+A production-ready personal portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS. The contact form is backed by a real API route, PostgreSQL (via Prisma), and Resend for email delivery. Deployment target is Azure App Service.
 
 ## Stack
 
@@ -10,7 +10,6 @@ A production-ready personal portfolio built with Next.js (App Router), TypeScrip
 - **Forms:** `react-hook-form` + `zod`
 - **Database:** PostgreSQL via Prisma 7 (driver adapter: `@prisma/adapter-pg`)
 - **Email:** Resend + React Email
-- **Monitoring:** Azure Application Insights (`applicationinsights` Node SDK, via `instrumentation.ts`)
 - **Deployment:** Azure App Service (Linux/Node) + Azure Database for PostgreSQL Flexible Server, provisioned via Bicep
 
 ## Getting started
@@ -35,7 +34,6 @@ Copy `.env.example` to `.env` and fill in the values:
 | `CONTACT_TO_EMAIL` | Inbox that receives contact form submissions |
 | `NEXT_PUBLIC_RESUME_URL` | Link opened by the "Resume" button in the hero section |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL, used for metadata/sitemap/OG image generation |
-| `APPLICATIONINSIGHTS_CONNECTION_STRING` | Azure Application Insights connection string (leave blank to disable monitoring locally) |
 
 ### 3. Local database
 
@@ -76,14 +74,14 @@ All site copy — profile, tech stack, experience, and projects — lives in [`l
 
 ## Architecture notes
 
-- **Contact flow** (`app/api/contact/route.ts`): validates input with `zod`, checks a hidden honeypot field, rate-limits by IP using a Postgres query (3 submissions per 10 minutes — no Redis needed), persists the submission, then sends a notification email via Resend. Failures are tracked to Application Insights and surfaced to the user with an honest error message (the submission is still saved even if the email fails).
+- **Contact flow** (`app/api/contact/route.ts`): validates input with `zod`, checks a hidden honeypot field, rate-limits by IP using a Postgres query (3 submissions per 10 minutes — no Redis needed), persists the submission, then sends a notification email via Resend. Failures are surfaced to the user with an honest error message (the submission is still saved even if the email fails).
 - **Health check** (`app/api/health/route.ts`): a `SELECT 1` DB ping, used by App Service's health-check probe.
 - **Theming**: `next-themes` persists the user's preference in `localStorage` and respects `prefers-color-scheme` by default.
 - **Motion**: shared `framer-motion` variants in `lib/motion.ts`; a global `prefers-reduced-motion` media query in `app/globals.css` disables animation for users who request it.
 
 ## Deploying to Azure
 
-Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App Service Plan + Web App (Node 20), Azure Database for PostgreSQL Flexible Server, and Application Insights + Log Analytics.
+Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App Service Plan + Web App (Node 20) and Azure Database for PostgreSQL Flexible Server.
 
 1. **Provision infrastructure** (adjust `infra/main.parameters.json` first — set a real `dbAdminPassword`):
 
@@ -116,4 +114,4 @@ Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App
 
 ### Explicitly out of scope for this pass
 
-No authentication, no Blob Storage, no Container Apps (App Service was chosen instead), no Redis (Postgres-backed rate limiting instead), no CMS/admin panel, no Key Vault wiring, and no Sentry (Application Insights only — worth comparing later if you want deeper frontend error tracking).
+No authentication, no Blob Storage, no Container Apps (App Service was chosen instead), no Redis (Postgres-backed rate limiting instead), no CMS/admin panel, no Key Vault wiring, and no error/monitoring tracking (worth adding later if you want visibility into production failures).

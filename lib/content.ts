@@ -176,6 +176,7 @@ export type ProjectEntry = {
   badge?: string;
   image?: string;
   link?: string;
+  links?: { label: string; url: string }[];
   stack: string[];
 };
 
@@ -195,15 +196,82 @@ export const projects: ProjectEntry[] = [
     stack: ["React", "Node","MongoDB","Material UI", "Microfrontend Architecture", "AI Translation", "Redis"],
   },
   {
-    title: "Aapmor Website",
-    meta: "AAPMOR TECHNOLOGIES · MICROFRONTEND ARCHITECTURE · 2023 TO PRESENT",
+    title: "Aapmor Blogs",
+    meta: "AAPMOR TECHNOLOGIES · FULL-STACK BLOG PLATFORM · 2024 TO PRESENT",
     description:
-      "Company website built with a focus on interactive UI and a smooth user experience. Introduced microfrontend architecture to decouple features, reducing dependencies and enabling independent development and deployment.",
-    quote: "Decoupled the features, not just the code.",
+      "A full-stack blog platform enabling users to write, edit, preview, and share blogs, with social features (likes, comments, saving) and admin capabilities to manage users and content.",
+    bullets: [
+      "Create, preview, edit, and delete blogs with real-time notifications via Socket.IO.",
+      "Rich-text editor using React-Quill; trending, liked, and viewed blogs sections.",
+      "Light/Dark mode toggle and Lottie animations for enhanced UX.",
+      "Admin panel for managing blogs, users, and winner announcements; OTP login and JWT-based authentication.",
+    ],
+    quote: "A platform where writers thrive and readers discover stories.",
+    badge: "Live",
+    image: "/images/aapmor-blogs.png",
+    link: "https://blogs.aapmor.com/",
+    stack: ["React", "Node.js", "MongoDB", "Socket.IO", "React-Quill", "JWT", "Lottie", "Material UI"],
+  },
+  {
+    title: "Performance Management System",
+    meta: "AAPMOR TECHNOLOGIES · ROLE-BASED PERFORMANCE MANAGEMENT · 2024 TO PRESENT",
+    description:
+      "A role-based web application designed to manage employee performance and learning goals across Admin, Manager, Lead, and Employee roles with multi-level approval workflows and intelligent performance scoring.",
+    bullets: [
+      "Built role-based access control with Admin, Manager, Lead, and Employee roles supporting granular permissions.",
+      "Implemented multi-level approval workflows and quarterly evaluation cycles with weighted scoring logic.",
+      "Developed dynamic scoring engine combining competency and technical goal performance into a unified performance score.",
+      "Architected achievement tracking system with role-based feedback and notification mechanisms.",
+      "Created admin analytics dashboard for performance trends, team comparisons, and goal completion metrics.",
+      "Implemented comprehensive audit logging for compliance and performance tracking.",
+    ],
+    quote: "Where performance meets growth through intelligent feedback and transparent evaluation.",
+    badge: "Internal",
+    stack: ["React", "Node.js", "MongoDB", "REST API", "Material UI", "Chart.js", "Role-Based Access Control"],
+  },
+  {
+    title: "Internal Tools & Side Projects",
+    meta: "AAPMOR TECHNOLOGIES · MULTIPLE PROJECTS · 2023 TO PRESENT",
+    description:
+      "Collection of internal tools and side projects built to streamline operations, manage employees, and solve real-world problems. Includes an enterprise website with microfrontend architecture, a comprehensive employee management system, and a SaaS scheduling application.",
+    bullets: [
+      "Aapmor Website: Company website with focus on interactive UI and smooth UX. Introduced microfrontend architecture to decouple features, reducing dependencies and enabling independent deployment.",
+      "Nexus: Robust internal application for managing employees, access control, and recruitment. Implements RBAC (Super Admin, Admin, Lead, Employee) with role-tailored dashboards.",
+      "Nexus - Employee Management: Add, edit, and delete users based on role-based access control with comprehensive audit trails.",
+      "Nexus - Recruitment Module: Manage new joiners, interview scheduling, and selection process with workflow automation.",
+      "Nexus - AI Chatbot: Integrated OpenAI chatbot for answering employee queries from internal documentation, improving employee experience.",
+      "Shiftlyn: Modern SaaS scheduling application enabling efficient team scheduling, shift management, and employee availability tracking.",
+    ],
+    quote: "Building tools that make teams work smarter, not harder.",
     badge: "Live",
     image: "/images/project-aapmor.png",
-    link: "https://aapmor.com/",
-    stack: ["React", "Material UI", "Framer Motion"],
+    links: [
+      { label: "Aapmor Website", url: "https://aapmor.com/" },
+      { label: "Shiftlyn", url: "https://shiftlyn.com/" },
+    ],
+    stack: ["React", "Node.js", "MongoDB", "Material UI", "Framer Motion", "RBAC", "AuthX", "OpenAI", "REST API", "TypeScript"],
+  },
+  {
+    title: "Personal Portfolio",
+    meta: "PERSONAL PROJECT · FULL-STACK PORTFOLIO · V1 (2023) & V2 (2026)",
+    description:
+      "Evolution of personal portfolio showcasing professional work and skills. V1 built with React highlighting career journey. V2 redesigned with Next.js, TypeScript, and modern animations for a polished, interactive experience with real-time contact form integration.",
+    bullets: [
+      "V1 (React): Simple, clean portfolio with career timeline, skills showcase, and project gallery deployed on Vercel.",
+      "V2 (Next.js): Comprehensive redesign featuring sticky-note skill cards, scroll-driven timeline animations, and integrated contact form with email notifications.",
+      "Implemented Framer Motion animations (spring physics, scroll-driven progress, traveling glows) for smooth, engaging interactions.",
+      "Added real-time form validation with React Hook Form + Zod, email delivery via Resend, and database storage with Prisma.",
+      "Responsive design with light/dark mode toggle and mobile-optimized layouts using Tailwind CSS.",
+      "Deployed V2 on Azure App Service with PostgreSQL database and Application Insights monitoring.",
+    ],
+    quote: "A developer's portfolio is their digital handshake — make it memorable.",
+    badge: "Live",
+    image: "/images/portfolio-v2.png",
+    links: [
+      { label: "V2 (Current)", url: "https://pranaydasari.in/" },
+      { label: "V1 (Archive)", url: "https://pradeep-dasari.vercel.app/" },
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Prisma", "PostgreSQL", "Resend", "Azure", "Vercel"],
   },
 ];
 

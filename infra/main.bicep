@@ -1,7 +1,6 @@
 // Provisions the Azure infrastructure for the portfolio site:
 //   - Linux App Service Plan + Web App (Node 20 LTS) running the Next.js server
 //   - Azure Database for PostgreSQL Flexible Server (Burstable B1ms)
-//   - Log Analytics workspace + Application Insights for monitoring
 //
 // Secrets (DATABASE_URL, RESEND_API_KEY, etc.) are declared as app settings with
 // placeholder values below and must be filled in after provisioning, e.g.:
@@ -32,27 +31,6 @@ var appServicePlanName = '${namePrefix}-plan'
 var webAppName = '${namePrefix}-web'
 var dbServerName = '${namePrefix}-pg'
 var dbName = 'portfolio'
-var logAnalyticsName = '${namePrefix}-logs'
-var appInsightsName = '${namePrefix}-insights'
-
-resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
-  name: logAnalyticsName
-  location: location
-  properties: {
-    sku: { name: 'PerGB2018' }
-    retentionInDays: 30
-  }
-}
-
-resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: appInsightsName
-  location: location
-  kind: 'web'
-  properties: {
-    Application_Type: 'web'
-    WorkspaceResourceId: logAnalytics.id
-  }
-}
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
@@ -90,10 +68,6 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
         { name: 'CONTACT_TO_EMAIL', value: 'REPLACE_ME' }
         { name: 'NEXT_PUBLIC_SITE_URL', value: 'https://${webAppName}.azurewebsites.net' }
         { name: 'NEXT_PUBLIC_RESUME_URL', value: 'REPLACE_ME' }
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: appInsights.properties.ConnectionString
-        }
       ]
     }
   }
@@ -136,4 +110,3 @@ resource database 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2023-06-0
 output webAppName string = webApp.name
 output webAppDefaultHostName string = webApp.properties.defaultHostName
 output postgresServerFqdn string = dbServer.properties.fullyQualifiedDomainName
-output applicationInsightsConnectionString string = appInsights.properties.ConnectionString

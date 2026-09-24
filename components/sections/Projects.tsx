@@ -55,16 +55,32 @@ export function Projects() {
                     ))}
                   </div>
 
-                  <DrawOutlineButton
-                    as="a"
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-8"
-                  >
-                    Visit site
-                    <ArrowRight size={16} />
-                  </DrawOutlineButton>
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
+                    {project.links ? (
+                      project.links.map((link) => (
+                        <DrawOutlineButton
+                          key={link.url}
+                          as="a"
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {link.label}
+                          <ArrowRight size={16} />
+                        </DrawOutlineButton>
+                      ))
+                    ) : project.link ? (
+                      <DrawOutlineButton
+                        as="a"
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit site
+                        <ArrowRight size={16} />
+                      </DrawOutlineButton>
+                    ) : null}
+                  </div>
                 </div>
 
                 <div className="relative flex min-h-60 items-start justify-center sm:min-h-72 sm:justify-end">

@@ -61,7 +61,7 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${plexMono.variable} scroll-smooth antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col">
+      <body className="flex flex-col min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
