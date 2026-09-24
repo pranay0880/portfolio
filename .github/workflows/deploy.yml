@@ -26,6 +26,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net
+          NEXT_PUBLIC_RESUME_URL: ${{ secrets.NEXT_PUBLIC_RESUME_URL }}
 
       - name: Apply pending database migrations
         run: npx prisma migrate deploy
