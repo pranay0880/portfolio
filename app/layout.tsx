@@ -6,6 +6,7 @@ import { IntroProvider } from "@/components/providers/IntroProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { IntroAnimation } from "@/components/IntroAnimation";
+import { AnimeCursor } from "@/components/cursor/AnimeCursor";
 import { profile, siteMeta } from "@/lib/content";
 
 const geistSans = Geist({
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteMeta.siteUrl),
   title: {
     default: siteMeta.title,
-    template: `%s — ${profile.name}`,
+    template: `%s - ${profile.name}`,
   },
   description: siteMeta.description,
   openGraph: {
@@ -66,6 +67,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <AnimeCursor />
         <ThemeProvider>
           <IntroProvider>
             <IntroAnimation />

@@ -20,7 +20,10 @@ export function Hero() {
         <motion.div initial="hidden" animate={show} variants={staggerChildren}>
           <motion.h1
             variants={fadeUp}
-            className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl"
+            className="text-5xl text-foreground sm:text-6xl"
+            style={{
+              fontFamily: "'Miyukatsu', 'Arial', sans-serif",
+            }}
           >
             {profile.name}
           </motion.h1>
@@ -60,7 +63,6 @@ export function Hero() {
                 priority
               />
             </div>
-            
           </div>
         </motion.div>
       </Container>

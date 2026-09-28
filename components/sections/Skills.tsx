@@ -141,7 +141,7 @@ export function Skills() {
         <SectionHeading
           eyebrow="Skill Progression"
           title="Technologies I work with"
-          description="Pinned up like notes on my wall — the stack, the current rank, and the motto that keeps me grinding."
+          description="Pinned up like notes on my wall - the stack, the current rank, and the motto that keeps me grinding."
         />
 
         <div className="relative overflow-hidden rounded-2xl border border-border bg-[radial-gradient(circle,var(--color-border)_1px,transparent_1px)] bg-[length:18px_18px] p-6 sm:p-10">
@@ -155,6 +155,26 @@ export function Skills() {
               transition={{ duration: d.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
             />
           ))}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute bottom-4 right-6 opacity-20 sm:bottom-8 sm:right-10"
+          >
+            <span
+              className="inline-block bg-foreground"
+              style={{
+                width: 120,
+                height: 120,
+                WebkitMaskImage: "url(/images/logo-mark-tight.png)",
+                maskImage: "url(/images/logo-mark-tight.png)",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+              }}
+            />
+          </div>
           <motion.div
             aria-hidden
             className="pointer-events-none absolute -z-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl"

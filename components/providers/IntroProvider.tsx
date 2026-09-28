@@ -59,7 +59,7 @@ const STAGE_DELAY: Record<Exclude<IntroStage, "done">, number> = {
  * should wait for the intro, not play hidden behind the opaque overlay)
  * both read from this context instead of duplicating the state machine.
  *
- * Defaults to "done"/introDone=true — the safe value for SSR and the
+ * Defaults to "done"/introDone=true - the safe value for SSR and the
  * client's first render (both must match to avoid a hydration mismatch).
  * The effect below only runs client-side, after mount, and flips into the
  * actual intro sequence if reduced-motion isn't set and the real navbar

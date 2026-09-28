@@ -11,7 +11,7 @@ const eslintConfig = defineConfig([
   { rules: jsxA11y.flatConfigs.recommended.rules },
   // One-time mount-effect state initialization (DOM measurement, reduced-motion
   // checks, etc.) is a legitimate pattern, not a prop/state sync that risks
-  // cascading renders — disable repo-wide rather than per call site.
+  // cascading renders - disable repo-wide rather than per call site.
   { rules: { "react-hooks/set-state-in-effect": "off" } },
   // Override default ignores of eslint-config-next.
   globalIgnores([

@@ -199,7 +199,7 @@ export function Contact() {
                   ) : null}
                 </div>
 
-                {/* Honeypot field — hidden from sighted/keyboard users, bots tend to fill every input. */}
+                {/* Honeypot field - hidden from sighted/keyboard users, bots tend to fill every input. */}
                 <div className="absolute -left-[9999px]" aria-hidden="true">
                   <label htmlFor="company">Company</label>
                   <input
@@ -226,7 +226,7 @@ export function Contact() {
                 {submitState === "success" ? (
                   <p className="flex items-center gap-2 text-sm text-emerald-500">
                     <CheckCircle2 size={16} />
-                    Thanks — your message has been sent.
+                    Thanks - your message has been sent.
                   </p>
                 ) : null}
 

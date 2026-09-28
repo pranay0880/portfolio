@@ -24,10 +24,10 @@ export function About() {
           >
             <motion.div
               variants={fadeUp}
-              className="max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground"
+              className="max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground [&_strong]:bg-primary/20 [&_strong]:text-primary [&_strong]:px-1.5 [&_strong]:py-0.5 [&_strong]:rounded"
             >
               {profile.bio.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
               ))}
             </motion.div>
 

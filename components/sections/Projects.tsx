@@ -29,9 +29,27 @@ export function Projects() {
             <Container>
               <div className="grid gap-10 py-12 sm:grid-cols-2 sm:gap-8 sm:py-16">
                 <div>
-                  <span className="font-mono text-sm text-muted-foreground">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      aria-hidden
+                      className="inline-block bg-primary"
+                      style={{
+                        width: 24,
+                        height: 24,
+                        WebkitMaskImage: "url(/images/logo-mark-tight.png)",
+                        maskImage: "url(/images/logo-mark-tight.png)",
+                        WebkitMaskSize: "contain",
+                        maskSize: "contain",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskRepeat: "no-repeat",
+                        WebkitMaskPosition: "center",
+                        maskPosition: "center",
+                      }}
+                    />
+                    <span className="font-mono text-sm text-muted-foreground">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
                   <p className="mt-4 font-mono text-xs tracking-wide text-muted-foreground uppercase">
                     {project.meta}
                   </p>
@@ -83,8 +101,8 @@ export function Projects() {
                   </div>
                 </div>
 
-                <div className="relative flex min-h-60 items-start justify-center sm:min-h-72 sm:justify-end">
-                  <div className="relative w-56">
+                <div className="relative flex min-h-96 items-start justify-center sm:min-h-full sm:justify-end">
+                  <div className="relative w-80 sm:w-96">
                     {project.badge ? (
                       <span className="absolute top-0 right-0 -rotate-6 rounded-md border-2 border-primary px-3 py-1 font-mono text-xs font-bold tracking-widest text-primary uppercase">
                         {project.badge}
@@ -92,12 +110,12 @@ export function Projects() {
                     ) : null}
 
                     {project.image ? (
-                      <div className="relative mt-14 h-40 w-56 -rotate-3 overflow-hidden rounded-sm border-4 border-white shadow-[3px_6px_14px_rgba(0,0,0,0.25)] sm:mt-16">
+                      <div className="relative mt-14 h-48 w-80 -rotate-3 overflow-hidden rounded-sm border-4 border-white shadow-[3px_6px_14px_rgba(0,0,0,0.25)] sm:mt-16 sm:h-64 sm:w-full">
                         <Image
                           src={project.image}
                           alt={`${project.title} screenshot`}
                           fill
-                          sizes="224px"
+                          sizes="100%"
                           className="object-cover"
                         />
                       </div>

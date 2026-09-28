@@ -27,7 +27,7 @@ export function Navbar() {
 
   useEffect(() => {
     // "top" (the Hero section) is observed too, even though it has no nav
-    // link — otherwise activeId has nothing to reset it back to "top" once
+    // link - otherwise activeId has nothing to reset it back to "top" once
     // you scroll back up, and the last real section stays stuck as active.
     const sections = ["top", ...NAV_LINKS.map((link) => link.id)]
       .map((id) => document.getElementById(id))
@@ -104,6 +104,18 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative hidden rounded-full px-4 py-2 font-mono text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline-flex items-center gap-1"
+          >
+            <span>Resume</span>
+            <span
+              className="absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full bg-primary transition-transform duration-200 ease-out group-hover:scale-x-100"
+              aria-hidden="true"
+            />
+          </a>
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"

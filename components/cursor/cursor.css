@@ -1,0 +1,174 @@
+/* Anime cursor: Enma (exact pointer) + Zoro (lerped chaser).
+   Positions are written straight to `transform` from a rAF loop in
+   AnimeCursor, so nothing here animates position - only looks. */
+
+.anime-cursor-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.anime-cursor-layer > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+/* --- Enma ------------------------------------------------------------- */
+
+/* .sword-cursor / .sword-ghost are zero-size anchors sitting exactly on the
+   pointer; the blade hangs off them, rotated about its tip. */
+.sword-cursor,
+.sword-ghost {
+  width: 0;
+  height: 0;
+}
+
+.sword-cursor__blade {
+  position: absolute;
+  left: 0;
+  top: calc(var(--sword-t) / -2);
+  width: var(--sword-l);
+  height: var(--sword-t);
+  overflow: visible;
+  transform-origin: 0 50%;
+  transform: rotate(var(--sword-angle));
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.9, 0.3, 1.4),
+    filter 200ms ease-out;
+  /* Enma's purple haki aura. */
+  filter: drop-shadow(0 0 1.5px rgb(168 85 247 / 0.7)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6));
+}
+
+.sword-cursor[data-hover="true"] .sword-cursor__blade {
+  transform: rotate(var(--sword-angle)) scale(1.18);
+  filter: drop-shadow(0 0 3px rgb(192 132 252 / 0.95)) drop-shadow(0 0 7px rgb(147 51 234 / 0.6));
+}
+
+/* Click = a quick slash: the hilt swings down around the tip. */
+.sword-cursor[data-pressed="true"] .sword-cursor__blade {
+  transform: rotate(calc(var(--sword-angle) + 28deg)) scale(0.95);
+}
+
+/* Resting: the aura slowly breathes. Only the glow animates - the blade
+   never drifts off the hotspot. */
+.sword-cursor[data-idle="true"]:not([data-hover="true"]) .sword-cursor__blade {
+  animation: enma-aura 2.4s ease-in-out infinite;
+}
+
+@keyframes enma-aura {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 1.5px rgb(168 85 247 / 0.6)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgb(192 132 252 / 0.95)) drop-shadow(0 0 8px rgb(147 51 234 / 0.45));
+  }
+}
+
+.sword-ghost {
+  opacity: 0;
+}
+
+.sword-ghost .sword-cursor__blade {
+  transition: none;
+  filter: drop-shadow(0 0 3px rgb(168 85 247 / 0.9)) saturate(0.4) brightness(1.3);
+}
+
+/* --- Zoro ------------------------------------------------------------- */
+
+.zoro-runner {
+  width: var(--zoro-w);
+  height: var(--zoro-h);
+  opacity: 0;
+}
+
+.zoro-runner[data-visible="true"] {
+  opacity: 1;
+}
+
+.zoro-runner {
+  transition: opacity 250ms ease-out;
+}
+
+.zoro-runner__bob {
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+/* One strip per state (see ZORO_SHEETS); the rAF loop picks the frame via
+   background-position, CSS just swaps the sheet. */
+.zoro-runner__sprite {
+  width: 100%;
+  height: 100%;
+  background-image: var(--zoro-sheet-run);
+  background-repeat: no-repeat;
+  background-size: 800% 100%;
+  background-position: 0 0;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.35));
+  transform-origin: 50% 100%;
+}
+
+.zoro-runner[data-state="stand"] .zoro-runner__sprite {
+  background-image: var(--zoro-sheet-stand);
+  background-size: 700% 100%;
+}
+
+.zoro-runner[data-state="sleep"] .zoro-runner__sprite {
+  background-image: var(--zoro-sheet-sleep);
+  background-size: 1100% 100%;
+}
+
+.zoro-runner[data-facing="left"] .zoro-runner__sprite {
+  transform: scaleX(-1);
+}
+
+/* Woken up: a quick "!" pop as he sets off after the sword. */
+.zoro-runner__alert {
+  position: absolute;
+  top: -10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+  color: #fbbf24;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.7);
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+.zoro-runner[data-facing="right"] .zoro-runner__alert {
+  right: 4px;
+}
+
+.zoro-runner[data-facing="left"] .zoro-runner__alert {
+  left: 4px;
+}
+
+.zoro-runner[data-alert="true"] .zoro-runner__alert {
+  animation: zoro-alert 600ms cubic-bezier(0.2, 1.6, 0.4, 1) forwards;
+}
+
+@keyframes zoro-alert {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.4);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.2);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(1);
+  }
+}

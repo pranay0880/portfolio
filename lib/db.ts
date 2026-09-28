@@ -6,7 +6,7 @@ declare global {
 }
 
 function createPrismaClient() {
-  // DATABASE_URL must be a plain postgres:// connection string here — this
+  // DATABASE_URL must be a plain postgres:// connection string here - this
   // adapter is the raw `pg` driver, not Prisma's own engine. If you're using
   // `prisma dev` locally, use the "TCP" URL from `prisma dev ls`, not the
   // `prisma+postgres://...api_key=...` one (that's engine-only and silently

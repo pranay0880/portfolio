@@ -13,7 +13,7 @@ const CLONE_SIZE = 96;
  * spreading them apart horizontally (`</  />`), then closes that gap to
  * form the tight `<//>` mark, cross-fades into the actual logo image, then
  * flies from center-screen to wherever the real navbar logo
- * (id="site-logo-target") already sits — measured via getBoundingClientRect
+ * (id="site-logo-target") already sits - measured via getBoundingClientRect
  * rather than a cross-component shared layoutId, so the target is exact and
  * doesn't depend on the Navbar's logo ever being unmounted (it's rendered
  * the whole time, just visually covered by this opaque overlay until the

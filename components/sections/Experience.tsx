@@ -26,20 +26,20 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
 
   return (
     <motion.div variants={fadeUp} className="relative pl-20 sm:pl-24">
-      <span className="absolute top-0.5 left-0 w-12 text-right font-mono text-xs text-muted-foreground sm:w-16">
+      <span className="absolute top-0.5 left-0 w-12 text-right font-mono text-xs text-muted-foreground sm:w-16 pr-1 pt-0.5">
         {node.year}
       </span>
 
-      <motion.span
-        className="absolute top-1 left-[52px] h-3 w-3 sm:left-[68px]"
+      <motion.div
+        className="absolute top-0 left-[52px] sm:left-[62px]"
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={viewportOnce}
         transition={{ type: "spring", stiffness: 260, damping: 14, delay: index * 0.15 }}
       >
-        <motion.span
+        <motion.div
           aria-hidden
-          className="absolute inset-0 rounded-full border-2 border-primary bg-background"
+          className="relative flex h-6 w-6 items-center justify-center rounded-full"
           whileHover={{ scale: 1.35 }}
           animate={{
             boxShadow: [
@@ -48,8 +48,26 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
             ],
           }}
           transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut", delay: index * 0.5 + 0.6 }}
-        />
-      </motion.span>
+        >
+          <div className="absolute inset-0 rounded-full border-2 border-primary bg-background" />
+          <span
+            aria-hidden
+            className="relative inline-block bg-primary"
+            style={{
+              width: 14,
+              height: 14,
+              WebkitMaskImage: "url(/images/logo-mark-tight.png)",
+              maskImage: "url(/images/logo-mark-tight.png)",
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+            }}
+          />
+        </motion.div>
+      </motion.div>
 
       <h3 className="text-xl font-semibold text-foreground sm:text-2xl">{node.title}</h3>
       {node.role ? <p className="mt-0.5 text-sm text-muted-foreground">{node.role}</p> : null}
@@ -63,7 +81,7 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
             {node.projects.map((project) => (
               <p key={project.name} className="text-sm text-muted-foreground">
                 <span className="font-medium text-foreground">{project.name}</span>
-                {project.blurb ? <> — {project.blurb}</> : null}
+                {project.blurb ? <> - {project.blurb}</> : null}
               </p>
             ))}
           </div>

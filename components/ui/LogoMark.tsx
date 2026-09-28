@@ -6,7 +6,7 @@ type LogoMarkProps = { size?: number | "100%"; className?: string; id?: string }
  * `next/image` so it inherits the surrounding text color and stays legible
  * in both light and dark mode without needing separate color variants.
  *
- * Decorative only — always paired with the visible name text, so it's
+ * Decorative only - always paired with the visible name text, so it's
  * hidden from assistive tech rather than given its own (redundant) label.
  */
 export function LogoMark({ size = 28, className = "", id }: LogoMarkProps) {
@@ -14,7 +14,7 @@ export function LogoMark({ size = 28, className = "", id }: LogoMarkProps) {
     <span
       id={id}
       aria-hidden="true"
-      className={`inline-block bg-current ${className}`}
+      className={`inline-block bg-primary ${className}`}
       style={{
         width: size,
         height: size,

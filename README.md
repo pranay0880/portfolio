@@ -1,4 +1,4 @@
-# Pradeep Dasari — Portfolio
+# Pradeep Dasari - Portfolio
 
 A production-ready personal portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS. The contact form is backed by a real API route, PostgreSQL (via Prisma), and Resend for email delivery. Deployment target is Azure App Service.
 
@@ -45,9 +45,9 @@ npx prisma dev ls   # copy the "TCP" connection string (NOT the prisma+postgres:
 npx prisma db push
 ```
 
-> Important: the app connects via `@prisma/adapter-pg` (a plain `pg` driver), which needs a **standard `postgres://` connection string** — use the `TCP` URL printed by `prisma dev ls`, not the `prisma+postgres://...api_key=...` proxy URL (that one is only understood by Prisma's own query engine, and silently fails/disconnects when handed to `pg`). This tripped up local verification during development until traced down — see `git log` / the `lib/db.ts` comment if this resurfaces.
+> Important: the app connects via `@prisma/adapter-pg` (a plain `pg` driver), which needs a **standard `postgres://` connection string** - use the `TCP` URL printed by `prisma dev ls`, not the `prisma+postgres://...api_key=...` proxy URL (that one is only understood by Prisma's own query engine, and silently fails/disconnects when handed to `pg`). This tripped up local verification during development until traced down - see `git log` / the `lib/db.ts` comment if this resurfaces.
 >
-> Also on this machine, `npx prisma migrate dev` (which needs a shadow database) was unreliable against Prisma's embedded dev-Postgres — `prisma db push` was used instead to verify the schema end-to-end, and the versioned migration in `prisma/migrations/` was authored via `prisma migrate diff`. Against a real Postgres (Azure Flexible Server), `prisma migrate dev` / `prisma migrate deploy` should work normally.
+> Also on this machine, `npx prisma migrate dev` (which needs a shadow database) was unreliable against Prisma's embedded dev-Postgres - `prisma db push` was used instead to verify the schema end-to-end, and the versioned migration in `prisma/migrations/` was authored via `prisma migrate diff`. Against a real Postgres (Azure Flexible Server), `prisma migrate dev` / `prisma migrate deploy` should work normally.
 
 ### 4. Run the app
 
@@ -70,11 +70,11 @@ Visit `http://localhost:3000`.
 
 ## Content
 
-All site copy — profile, tech stack, experience, and projects — lives in [`lib/content.ts`](lib/content.ts) as typed data. Add a new project or job by adding an object to the relevant array; no component changes needed.
+All site copy - profile, tech stack, experience, and projects - lives in [`lib/content.ts`](lib/content.ts) as typed data. Add a new project or job by adding an object to the relevant array; no component changes needed.
 
 ## Architecture notes
 
-- **Contact flow** (`app/api/contact/route.ts`): validates input with `zod`, checks a hidden honeypot field, rate-limits by IP using a Postgres query (3 submissions per 10 minutes — no Redis needed), persists the submission, then sends a notification email via Resend. Failures are surfaced to the user with an honest error message (the submission is still saved even if the email fails).
+- **Contact flow** (`app/api/contact/route.ts`): validates input with `zod`, checks a hidden honeypot field, rate-limits by IP using a Postgres query (3 submissions per 10 minutes - no Redis needed), persists the submission, then sends a notification email via Resend. Failures are surfaced to the user with an honest error message (the submission is still saved even if the email fails).
 - **Health check** (`app/api/health/route.ts`): a `SELECT 1` DB ping, used by App Service's health-check probe.
 - **Theming**: `next-themes` persists the user's preference in `localStorage` and respects `prefers-color-scheme` by default.
 - **Motion**: shared `framer-motion` variants in `lib/motion.ts`; a global `prefers-reduced-motion` media query in `app/globals.css` disables animation for users who request it.
@@ -83,7 +83,7 @@ All site copy — profile, tech stack, experience, and projects — lives in [`l
 
 Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App Service Plan + Web App (Node 20) and Azure Database for PostgreSQL Flexible Server.
 
-1. **Provision infrastructure** (adjust `infra/main.parameters.json` first — set a real `dbAdminPassword`):
+1. **Provision infrastructure** (adjust `infra/main.parameters.json` first - set a real `dbAdminPassword`):
 
    ```bash
    az group create -n portfolio-rg -l eastus
@@ -104,13 +104,13 @@ Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App
      NEXT_PUBLIC_RESUME_URL="..."
    ```
 
-   (Wiring these through Key Vault references instead of plain app settings is a good follow-up hardening step — intentionally left out of this first pass.)
+   (Wiring these through Key Vault references instead of plain app settings is a good follow-up hardening step - intentionally left out of this first pass.)
 
 3. **Set up GitHub Actions secrets** for [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
-   - `AZURE_WEBAPP_PUBLISH_PROFILE` — download from the Web App's "Get publish profile" in the Azure Portal
-   - `DATABASE_URL` — same connection string as above, used to run `prisma migrate deploy` before each deploy
+   - `AZURE_WEBAPP_PUBLISH_PROFILE` - download from the Web App's "Get publish profile" in the Azure Portal
+   - `DATABASE_URL` - same connection string as above, used to run `prisma migrate deploy` before each deploy
 
-4. Push to `main` — CI runs a build, then the deploy workflow applies pending migrations and deploys to App Service.
+4. Push to `main` - CI runs a build, then the deploy workflow applies pending migrations and deploys to App Service.
 
 ### Explicitly out of scope for this pass
 

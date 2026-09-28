@@ -4,13 +4,13 @@ export const profile = {
   name: "Pranay Dasari",
   title: "Full Stack Developer",
   availability: "Curious, Learning, Growing",
-  tagline: "Full Stack Developer — Building with Purpose.",
+  tagline: "Full Stack Developer - Building with Purpose.",
   summary:
-    "3 years of experience working across React, Next.js, and Node.js — taking features from interface to database without losing sight of how they hold up in production. Away from the keyboard, usually watching anime, drawn to the same craftsmanship that goes into a well-built feature.",
+    "3+ years building across React, Next.js, and Node.js - shipping features that scale and code that lasts. Off-duty anime fan, convinced that great software and great anime follow the same formula: solid characters, good pacing, and a satisfying ending.",
   bio: [
-    "My story started with curiosity about how things work, and turned into a habit of building products that solve real problems.",
-    "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend—with a focus on architecture that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
-    "I've also built AI-powered features that make products more accessible across languages and regions, and taken on mentoring junior developers as I've grown into ownership of larger pieces of the systems I work on.",
+    "My story started with curiosity about how things work, and turned into a habit of <strong>building products</strong> that solve real problems.",
+    "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend with a focus on <strong>scalable architecture</strong> that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
+    "I've also built <strong>AI-powered features</strong> that make products more accessible across languages and regions, and taken on mentoring junior developers as I've grown into ownership of larger pieces of the systems I work on.",
   ],
   location: "India",
   email: "pranay0880@gmail.com",
@@ -264,7 +264,7 @@ export const projects: ProjectEntry[] = [
       "Responsive design with light/dark mode toggle and mobile-optimized layouts using Tailwind CSS.",
       "Deployed V2 on Azure App Service with PostgreSQL database and Application Insights monitoring.",
     ],
-    quote: "A developer's portfolio is their digital handshake — make it memorable.",
+    quote: "A developer's portfolio is their digital handshake - make it memorable.",
     badge: "Live",
     image: "/images/portfolio-v2.png",
     links: [
@@ -277,6 +277,6 @@ export const projects: ProjectEntry[] = [
 
 export const siteMeta = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  title: `${profile.name} — ${profile.title}`,
+  title: `${profile.name} - ${profile.title}`,
   description: profile.summary,
 };
