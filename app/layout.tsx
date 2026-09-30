@@ -6,7 +6,8 @@ import { IntroProvider } from "@/components/providers/IntroProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { IntroAnimation } from "@/components/IntroAnimation";
-import { AnimeCursor } from "@/components/cursor/AnimeCursor";
+import { CustomCursor } from "@/components/CustomCursor";
+import { LostZoro } from "@/components/cursor/LostZoro";
 import { profile, siteMeta } from "@/lib/content";
 
 const geistSans = Geist({
@@ -62,12 +63,13 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${plexMono.variable} scroll-smooth antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex flex-col min-h-screen">
+      <body className="flex min-h-screen flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <AnimeCursor />
+        <CustomCursor />
+        <LostZoro />
         <ThemeProvider>
           <IntroProvider>
             <IntroAnimation />

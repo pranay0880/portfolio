@@ -208,7 +208,7 @@ export const projects: ProjectEntry[] = [
     ],
     quote: "A platform where writers thrive and readers discover stories.",
     badge: "Live",
-    image: "/images/aapmor-blogs.png",
+    image: "/images/aapmor-blogs.webp",
     link: "https://blogs.aapmor.com/",
     stack: ["React", "Node.js", "MongoDB", "Socket.IO", "React-Quill", "JWT", "Lottie", "Material UI"],
   },
@@ -244,7 +244,7 @@ export const projects: ProjectEntry[] = [
     ],
     quote: "Building tools that make teams work smarter, not harder.",
     badge: "Live",
-    image: "/images/project-aapmor.png",
+    image: "/images/project-aapmor.webp",
     links: [
       { label: "Aapmor Website", url: "https://aapmor.com/" },
       { label: "Shiftlyn", url: "https://shiftlyn.com/" },
@@ -266,7 +266,7 @@ export const projects: ProjectEntry[] = [
     ],
     quote: "A developer's portfolio is their digital handshake - make it memorable.",
     badge: "Live",
-    image: "/images/portfolio-v2.png",
+    image: "/images/portfolio-v2.webp",
     links: [
       { label: "V2 (Current)", url: "https://pranaydasari.in/" },
       { label: "V1 (Archive)", url: "https://pradeep-dasari.vercel.app/" },

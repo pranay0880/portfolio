@@ -61,8 +61,8 @@ a, button, [role="button"] {
 }
 
 /* The CSS cursor above is the fallback for touch devices, no-JS, and
-   prefers-reduced-motion. Once AnimeCursor mounts the live sword + Zoro
-   cursor, hide the native/fallback cursor everywhere. */
+   prefers-reduced-motion. Once CustomCursor mounts a live, animated version
+   of the same mark, hide the native/fallback cursor everywhere. */
 html.has-custom-cursor,
 html.has-custom-cursor * {
   cursor: none !important;

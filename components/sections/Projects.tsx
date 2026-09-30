@@ -16,7 +16,7 @@ export function Projects() {
         <SectionHeading eyebrow="Quests" title="Things I've built" />
       </Container>
 
-      <div className="border-t border-border">
+      <div className="border-border border-t">
         {projects.map((project, index) => (
           <motion.article
             key={project.title}
@@ -24,7 +24,7 @@ export function Projects() {
             whileInView="show"
             viewport={viewportOnce}
             variants={fadeUp}
-            className={`border-b border-border ${index % 2 === 1 ? "bg-surface-muted/40" : ""}`}
+            className={`border-border border-b ${index % 2 === 1 ? "bg-surface-muted/40" : ""}`}
           >
             <Container>
               <div className="grid gap-10 py-12 sm:grid-cols-2 sm:gap-8 sm:py-16">
@@ -32,7 +32,7 @@ export function Projects() {
                   <div className="flex items-center gap-2">
                     <span
                       aria-hidden
-                      className="inline-block bg-primary"
+                      className="bg-primary inline-block"
                       style={{
                         width: 24,
                         height: 24,
@@ -46,21 +46,21 @@ export function Projects() {
                         maskPosition: "center",
                       }}
                     />
-                    <span className="font-mono text-sm text-muted-foreground">
+                    <span className="text-muted-foreground font-mono text-sm">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <p className="mt-4 font-mono text-xs tracking-wide text-muted-foreground uppercase">
+                  <p className="text-muted-foreground mt-4 font-mono text-xs tracking-wide uppercase">
                     {project.meta}
                   </p>
-                  <h3 className="mt-3 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                  <h3 className="text-foreground mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
                     {project.title}
                   </h3>
-                  <p className="mt-4 max-w-md text-base text-muted-foreground">
+                  <p className="text-muted-foreground mt-4 max-w-md text-base">
                     {project.description}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm text-muted-foreground">
+                  <div className="text-muted-foreground mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm">
                     {project.stack.map((tech, i) => (
                       <span key={tech} className="flex items-center gap-x-2">
                         {i > 0 ? (
@@ -104,7 +104,7 @@ export function Projects() {
                 <div className="relative flex min-h-96 items-start justify-center sm:min-h-full sm:justify-end">
                   <div className="relative w-80 sm:w-96">
                     {project.badge ? (
-                      <span className="absolute top-0 right-0 -rotate-6 rounded-md border-2 border-primary px-3 py-1 font-mono text-xs font-bold tracking-widest text-primary uppercase">
+                      <span className="border-primary text-primary absolute top-0 right-0 -rotate-6 rounded-md border-2 px-3 py-1 font-mono text-xs font-bold tracking-widest uppercase">
                         {project.badge}
                       </span>
                     ) : null}
@@ -115,8 +115,11 @@ export function Projects() {
                           src={project.image}
                           alt={`${project.title} screenshot`}
                           fill
-                          sizes="100%"
-                          className="object-cover"
+                          // Real rendered width, so Next serves a sharp
+                          // variant ("100%" isn't a valid sizes value).
+                          sizes="(min-width: 640px) 384px, 320px"
+                          quality={90}
+                          className="object-cover object-top"
                         />
                       </div>
                     ) : null}
