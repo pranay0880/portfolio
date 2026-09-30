@@ -62,8 +62,8 @@ export function Contact() {
       <Container>
         <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
           <SectionHeading
-            eyebrow="Contact"
-            title="Open a Portal. Let's Build."
+            eyebrow="Summon"
+            title="Cast the Summon. Let's Build."
             description="Have a project, idea, or opportunity in mind? Send a message and let's start a conversation."
           />
 

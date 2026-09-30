@@ -117,7 +117,7 @@ export function Experience() {
     <section id="experience" className="scroll-mt-16 py-16 sm:py-24">
       <Container>
         <SectionHeading
-          eyebrow="Experience"
+          eyebrow="Journey"
           title="Building, Shipping, Growing."
           description="From self-directed learning to production applications and full-stack ownership."
         />

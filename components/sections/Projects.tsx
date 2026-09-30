@@ -13,7 +13,7 @@ export function Projects() {
   return (
     <section id="projects" className="scroll-mt-16 py-16 sm:py-24">
       <Container>
-        <SectionHeading eyebrow="Projects" title="Things I've built" />
+        <SectionHeading eyebrow="Quests" title="Things I've built" />
       </Container>
 
       <div className="border-t border-border">

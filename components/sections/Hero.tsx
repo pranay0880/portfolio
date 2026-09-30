@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import localFont from "next/font/local";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -9,6 +10,14 @@ import { profile } from "@/lib/content";
 import { fadeUp, staggerChildren } from "@/lib/motion";
 import { handleAnchorClick } from "@/lib/scroll";
 import { useIntro } from "@/components/providers/IntroProvider";
+
+// Display face for the name only. "Japan Ramen" by Maknastudio - free for
+// personal use; a commercial licence is needed for commercial/promotional use.
+const japanRamen = localFont({
+  src: "../../app/fonts/japan-ramen.otf",
+  display: "swap",
+  fallback: ["Miyukatsu", "Arial", "sans-serif"],
+});
 
 export function Hero() {
   const { introDone } = useIntro();
@@ -20,21 +29,18 @@ export function Hero() {
         <motion.div initial="hidden" animate={show} variants={staggerChildren}>
           <motion.h1
             variants={fadeUp}
-            className="text-5xl text-foreground sm:text-6xl"
-            style={{
-              fontFamily: "'Miyukatsu', 'Arial', sans-serif",
-            }}
+            className={`${japanRamen.className} text-foreground text-5xl`}
           >
             {profile.name}
           </motion.h1>
-          <motion.p variants={fadeUp} className="mt-3 text-xl font-medium text-primary">
+          <motion.p variants={fadeUp} className="text-primary mt-3 text-xl font-medium">
             {profile.tagline}
           </motion.p>
-          <motion.p variants={fadeUp} className="mt-4 max-w-xl text-lg text-muted-foreground">
+          <motion.p variants={fadeUp} className="text-muted-foreground mt-4 max-w-xl text-lg">
             {profile.summary}
           </motion.p>
 
-          <motion.p variants={fadeUp} className="mt-6 text-sm text-muted-foreground">
+          <motion.p variants={fadeUp} className="text-muted-foreground mt-6 text-sm">
             {profile.availability}
           </motion.p>
 

@@ -11,12 +11,12 @@ import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
 import { useIntro } from "@/components/providers/IntroProvider";
 
-const NAV_LINKS = [
+export const NAV_LINKS = [
   { id: "about", label: "Character" },
   { id: "skills", label: "Abilities" },
-  { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
-  { id: "contact", label: "Contact" },
+  { id: "projects", label: "Quests" },
+  { id: "experience", label: "Journey" },
+  { id: "contact", label: "Summon" },
 ];
 
 export function Navbar() {
@@ -54,7 +54,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur"
+      className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur"
       initial={false}
       animate={showNavbar ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
@@ -64,7 +64,7 @@ export function Navbar() {
         <a
           href="#top"
           onClick={handleAnchorClick("top")}
-          className="flex items-center gap-2 text-base font-semibold tracking-tight text-foreground"
+          className="text-foreground flex items-center gap-2 text-base font-semibold tracking-tight"
         >
           <LogoMark id="site-logo-target" size={44} />
           {profile.name}
@@ -88,12 +88,12 @@ export function Navbar() {
                   {isActive ? (
                     <motion.span
                       layoutId="nav-active-underline"
-                      className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-primary"
+                      className="bg-primary absolute inset-x-0 -bottom-1 h-0.5 rounded-full"
                       transition={{ type: "spring", stiffness: 500, damping: 35 }}
                     />
                   ) : (
                     <span
-                      className="absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full bg-primary transition-transform duration-200 ease-out group-hover:scale-x-100"
+                      className="bg-primary absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full transition-transform duration-200 ease-out group-hover:scale-x-100"
                       aria-hidden="true"
                     />
                   )}
@@ -109,17 +109,17 @@ export function Navbar() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative hidden rounded-full px-4 py-2 font-mono text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline-flex items-center gap-1"
+            className="group text-muted-foreground hover:text-foreground relative hidden items-center gap-1 rounded-full px-4 py-2 font-mono text-sm font-medium transition-colors sm:inline-flex"
           >
             <span>Resume</span>
             <span
-              className="absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full bg-primary transition-transform duration-200 ease-out group-hover:scale-x-100"
+              className="bg-primary absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full transition-transform duration-200 ease-out group-hover:scale-x-100"
               aria-hidden="true"
             />
           </a>
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+            className="border-border text-foreground flex h-9 w-9 items-center justify-center rounded-full border md:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
@@ -132,7 +132,7 @@ export function Navbar() {
       <NavbarChase active={showNavbar} />
 
       {menuOpen ? (
-        <nav className="border-t border-border bg-background md:hidden">
+        <nav className="border-border bg-background border-t md:hidden">
           <Container className="flex flex-col py-2">
             {NAV_LINKS.map((link) => (
               <a
