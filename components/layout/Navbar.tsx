@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { NavbarChase } from "@/components/layout/NavbarChase";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
@@ -127,6 +128,8 @@ export function Navbar() {
           </button>
         </div>
       </Container>
+
+      <NavbarChase active={showNavbar} />
 
       {menuOpen ? (
         <nav className="border-t border-border bg-background md:hidden">

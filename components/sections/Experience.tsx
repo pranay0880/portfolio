@@ -31,7 +31,7 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
       </span>
 
       <motion.div
-        className="absolute top-0 left-[52px] sm:left-[62px]"
+        className="absolute top-0 left-[46px] sm:left-[62px]"
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
         viewport={viewportOnce}

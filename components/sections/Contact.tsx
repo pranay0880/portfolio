@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Mail, XCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ContactFoodChase } from "@/components/sections/ContactFoodChase";
 import { Card } from "@/components/ui/Card";
 import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
@@ -69,21 +70,18 @@ export function Contact() {
           <div className="grid gap-8 md:grid-cols-[2fr_3fr]">
             <Card className="flex flex-col justify-between">
               <div>
-                <p className="font-mono text-sm font-medium tracking-wide text-primary uppercase">
+                <p className="text-primary font-mono text-sm font-medium tracking-wide uppercase">
                   Direct Contact
                 </p>
 
                 <div className="mt-5 space-y-4">
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="group flex items-start gap-3"
-                  >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                  <a href={`mailto:${profile.email}`} className="group flex items-start gap-3">
+                    <span className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors">
                       <Mail size={16} />
                     </span>
                     <span>
-                      <span className="block text-sm font-medium text-foreground">Email</span>
-                      <span className="block text-sm text-muted-foreground">{profile.email}</span>
+                      <span className="text-foreground block text-sm font-medium">Email</span>
+                      <span className="text-muted-foreground block text-sm">{profile.email}</span>
                     </span>
                   </a>
 
@@ -93,14 +91,12 @@ export function Contact() {
                     rel="noopener noreferrer"
                     className="group flex items-start gap-3"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                    <span className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors">
                       <LinkedinIcon size={16} />
                     </span>
                     <span>
-                      <span className="block text-sm font-medium text-foreground">LinkedIn</span>
-                      <span className="block text-sm text-muted-foreground">
-                        Connect with me
-                      </span>
+                      <span className="text-foreground block text-sm font-medium">LinkedIn</span>
+                      <span className="text-muted-foreground block text-sm">Connect with me</span>
                     </span>
                   </a>
 
@@ -110,22 +106,22 @@ export function Contact() {
                     rel="noopener noreferrer"
                     className="group flex items-start gap-3"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                    <span className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors">
                       <GithubIcon size={16} />
                     </span>
                     <span>
-                      <span className="block text-sm font-medium text-foreground">GitHub</span>
-                      <span className="block text-sm text-muted-foreground">Explore my work</span>
+                      <span className="text-foreground block text-sm font-medium">GitHub</span>
+                      <span className="text-muted-foreground block text-sm">Explore my work</span>
                     </span>
                   </a>
                 </div>
               </div>
 
-              <div className="mt-8 border-t border-border pt-4">
-                <p className="font-mono text-sm font-medium tracking-wide text-primary uppercase">
+              <div className="border-border mt-8 border-t pt-4">
+                <p className="text-primary font-mono text-sm font-medium tracking-wide uppercase">
                   Current Status
                 </p>
-                <p className="mt-2 flex items-center gap-2 text-sm text-foreground">
+                <p className="text-foreground mt-2 flex items-center gap-2 text-sm">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -135,109 +131,119 @@ export function Contact() {
               </div>
             </Card>
 
-            <Card>
-              <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="mb-1 block text-sm font-medium text-foreground">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    autoComplete="name"
-                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
-                    aria-invalid={errors.name ? "true" : undefined}
-                    aria-describedby={errors.name ? "name-error" : undefined}
-                    {...register("name")}
-                  />
-                  {errors.name ? (
-                    <p id="name-error" className="mt-1 text-sm text-red-500">
-                      {errors.name.message}
-                    </p>
-                  ) : null}
-                </div>
+            {/* Wrapper so the Luffy gag can sit on the form card's top edge. */}
+            <div className="relative">
+              <ContactFoodChase />
+              <Card className="h-full">
+                <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="text-foreground mb-1 block text-sm font-medium"
+                    >
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      autoComplete="name"
+                      className="border-border bg-background text-foreground focus:border-primary w-full rounded-lg border px-3 py-2 text-sm outline-none"
+                      aria-invalid={errors.name ? "true" : undefined}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      {...register("name")}
+                    />
+                    {errors.name ? (
+                      <p id="name-error" className="mt-1 text-sm text-red-500">
+                        {errors.name.message}
+                      </p>
+                    ) : null}
+                  </div>
 
-                <div>
-                  <label htmlFor="email" className="mb-1 block text-sm font-medium text-foreground">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    autoComplete="email"
-                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
-                    aria-invalid={errors.email ? "true" : undefined}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                    {...register("email")}
-                  />
-                  {errors.email ? (
-                    <p id="email-error" className="mt-1 text-sm text-red-500">
-                      {errors.email.message}
-                    </p>
-                  ) : null}
-                </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="text-foreground mb-1 block text-sm font-medium"
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                      className="border-border bg-background text-foreground focus:border-primary w-full rounded-lg border px-3 py-2 text-sm outline-none"
+                      aria-invalid={errors.email ? "true" : undefined}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      {...register("email")}
+                    />
+                    {errors.email ? (
+                      <p id="email-error" className="mt-1 text-sm text-red-500">
+                        {errors.email.message}
+                      </p>
+                    ) : null}
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-1 block text-sm font-medium text-foreground"
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="text-foreground mb-1 block text-sm font-medium"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={5}
+                      className="border-border bg-background text-foreground focus:border-primary w-full rounded-lg border px-3 py-2 text-sm outline-none"
+                      aria-invalid={errors.message ? "true" : undefined}
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      {...register("message")}
+                    />
+                    {errors.message ? (
+                      <p id="message-error" className="mt-1 text-sm text-red-500">
+                        {errors.message.message}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  {/* Honeypot field - hidden from sighted/keyboard users, bots tend to fill every input. */}
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <label htmlFor="company">Company</label>
+                    <input
+                      id="company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      {...register("company")}
+                    />
+                  </div>
+
+                  <DrawOutlineButton
+                    as="button"
+                    type="submit"
+                    disabled={submitState === "submitting"}
+                    className="disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
-                    aria-invalid={errors.message ? "true" : undefined}
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                    {...register("message")}
-                  />
-                  {errors.message ? (
-                    <p id="message-error" className="mt-1 text-sm text-red-500">
-                      {errors.message.message}
+                    {submitState === "submitting" ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : null}
+                    Send message
+                  </DrawOutlineButton>
+
+                  {submitState === "success" ? (
+                    <p className="flex items-center gap-2 text-sm text-emerald-500">
+                      <CheckCircle2 size={16} />
+                      Thanks - your message has been sent.
                     </p>
                   ) : null}
-                </div>
 
-                {/* Honeypot field - hidden from sighted/keyboard users, bots tend to fill every input. */}
-                <div className="absolute -left-[9999px]" aria-hidden="true">
-                  <label htmlFor="company">Company</label>
-                  <input
-                    id="company"
-                    type="text"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    {...register("company")}
-                  />
-                </div>
-
-                <DrawOutlineButton
-                  as="button"
-                  type="submit"
-                  disabled={submitState === "submitting"}
-                  className="disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {submitState === "submitting" ? (
-                    <Loader2 size={16} className="animate-spin" />
+                  {submitState === "error" ? (
+                    <p className="flex items-center gap-2 text-sm text-red-500" role="alert">
+                      <XCircle size={16} />
+                      {errorMessage}
+                    </p>
                   ) : null}
-                  Send message
-                </DrawOutlineButton>
-
-                {submitState === "success" ? (
-                  <p className="flex items-center gap-2 text-sm text-emerald-500">
-                    <CheckCircle2 size={16} />
-                    Thanks - your message has been sent.
-                  </p>
-                ) : null}
-
-                {submitState === "error" ? (
-                  <p className="flex items-center gap-2 text-sm text-red-500" role="alert">
-                    <XCircle size={16} />
-                    {errorMessage}
-                  </p>
-                ) : null}
-              </form>
-            </Card>
+                </form>
+              </Card>
+            </div>
           </div>
         </motion.div>
       </Container>
