@@ -12,7 +12,7 @@ export const profile = {
     "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend with a focus on <strong>scalable architecture</strong> that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
     "I've also built <strong>AI-powered features</strong> that make products more accessible across languages and regions, and taken on mentoring junior developers as I've grown into ownership of larger pieces of the systems I work on.",
   ],
-  location: "India, Heyderabad.",
+  location: "India, Hyderabad.",
   email: "pranay0880@gmail.com",
   resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL ?? "/resume.pdf",
   social: {
