@@ -1,19 +1,29 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
-import { projects } from "@/lib/content";
+import { projects, type ProjectEntry } from "@/lib/content";
+import { ProjectDrawer } from "@/components/sections/ProjectDrawer";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 
 export function Projects() {
+  const [open, setOpen] = useState<ProjectEntry | null>(null);
+  // Stable so the drawer's effect doesn't re-run (and refocus) on every render.
+  const closeDrawer = useCallback(() => setOpen(null), []);
+
   return (
     <section id="projects" className="scroll-mt-16 py-16 sm:py-24">
       <Container>
-        <SectionHeading eyebrow="Quests" title="Things I've built" />
+        <SectionHeading
+          eyebrow="Quests"
+          title="What I built"
+          description="Open a case study for the problem, what I owned, the architecture, the key decision and the impact."
+        />
       </Container>
 
       <div className="border-border border-t">
@@ -36,8 +46,8 @@ export function Projects() {
                       style={{
                         width: 24,
                         height: 24,
-                        WebkitMaskImage: "url(/images/logo-mark-tight.png)",
-                        maskImage: "url(/images/logo-mark-tight.png)",
+                        WebkitMaskImage: "url(/images/logo-mark-tight.webp)",
+                        maskImage: "url(/images/logo-mark-tight.webp)",
                         WebkitMaskSize: "contain",
                         maskSize: "contain",
                         WebkitMaskRepeat: "no-repeat",
@@ -73,7 +83,16 @@ export function Projects() {
                     ))}
                   </div>
 
+                  {/* Headline impact, so the outcome is visible before opening the drawer. */}
+                  <p className="border-primary text-foreground mt-5 max-w-md border-l-2 pl-3 text-sm">
+                    {project.caseStudy.impact[0]}
+                  </p>
+
                   <div className="mt-8 flex flex-wrap items-center gap-3">
+                    <DrawOutlineButton as="button" type="button" onClick={() => setOpen(project)}>
+                      <FileText size={16} aria-hidden="true" />
+                      Case study
+                    </DrawOutlineButton>
                     {project.links ? (
                       project.links.map((link) => (
                         <DrawOutlineButton
@@ -124,9 +143,9 @@ export function Projects() {
                       </div>
                     ) : null}
 
-                    <div className="absolute top-24 right-0 w-52 rotate-2 rounded-sm border border-black/10 bg-[#f3dd8c] p-4 text-black/80 shadow-[2px_4px_10px_rgba(0,0,0,0.2)] sm:top-32">
-                      <span className="pointer-events-none absolute right-0 bottom-0 h-5 w-5 bg-black/15 [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
-                      <p className="text-sm leading-snug italic">&ldquo;{project.quote}&rdquo;</p>
+                    <div className="absolute top-52 -right-2 w-40 rotate-2 rounded-sm border border-black/10 bg-[#f3dd8c] px-2.5 py-2 text-black/75 shadow-[2px_4px_10px_rgba(0,0,0,0.2)] sm:top-68">
+                      <span className="pointer-events-none absolute right-0 bottom-0 h-3 w-3 bg-black/15 [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
+                      <p className="text-xs leading-snug italic">&ldquo;{project.quote}&rdquo;</p>
                     </div>
                   </div>
                 </div>
@@ -135,6 +154,7 @@ export function Projects() {
           </motion.article>
         ))}
       </div>
+      <ProjectDrawer project={open} onClose={closeDrawer} />
     </section>
   );
 }

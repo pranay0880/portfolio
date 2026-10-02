@@ -99,7 +99,7 @@ export function CustomCursor() {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[200] will-change-transform"
+      className="pointer-events-none fixed top-0 left-0 z-[200] will-change-transform"
       style={{
         x: cursorX,
         y: cursorY,

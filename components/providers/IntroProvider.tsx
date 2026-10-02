@@ -113,9 +113,7 @@ export function IntroProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <IntroContext.Provider
-      value={{ stage, target, introDone: stage === "done", introReady }}
-    >
+    <IntroContext.Provider value={{ stage, target, introDone: stage === "done", introReady }}>
       {children}
     </IntroContext.Provider>
   );

@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 // Sprite strips in public/navbar: frames laid out horizontally, each frame a
 // w x h cell with the feet on the bottom edge.
 const SHEETS = {
-  luffyRun: { src: "/navbar/luffy-run.png", frames: 8, w: 142, h: 113 },
-  luffyShock: { src: "/navbar/luffy-shock.png", frames: 1, w: 82, h: 86 },
-  garpLook: { src: "/navbar/garp-look.png", frames: 6, w: 125, h: 129 },
-  garpRun: { src: "/navbar/garp-run.png", frames: 5, w: 132, h: 107 },
+  luffyRun: { src: "/navbar/luffy-run.webp", frames: 8, w: 142, h: 113 },
+  luffyShock: { src: "/navbar/luffy-shock.webp", frames: 1, w: 82, h: 86 },
+  garpLook: { src: "/navbar/garp-look.webp", frames: 6, w: 125, h: 129 },
+  garpRun: { src: "/navbar/garp-run.webp", frames: 5, w: 132, h: 107 },
 } as const;
 type SheetKey = keyof typeof SHEETS;
 

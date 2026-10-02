@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { FileUser, Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { NavbarChase } from "@/components/layout/NavbarChase";
@@ -67,7 +67,7 @@ export function Navbar() {
           className="text-foreground flex items-center gap-2 text-base font-semibold tracking-tight"
         >
           <LogoMark id="site-logo-target" size={44} />
-          {profile.name}
+          <span className="whitespace-nowrap">{profile.name}</span>
         </a>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -109,13 +109,24 @@ export function Navbar() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group text-muted-foreground hover:text-foreground relative hidden items-center gap-1 rounded-full px-4 py-2 font-mono text-sm font-medium transition-colors sm:inline-flex"
+            className="group text-muted-foreground hover:text-foreground relative hidden items-center gap-1 rounded-full px-4 py-2 font-mono text-sm font-medium transition-colors md:inline-flex"
           >
             <span>Resume</span>
             <span
               className="bg-primary absolute inset-x-0 -bottom-1 h-0.5 origin-center scale-x-0 rounded-full transition-transform duration-200 ease-out group-hover:scale-x-100"
               aria-hidden="true"
             />
+          </a>
+          {/* Mobile: one-tap resume as an icon, matching the toggle buttons. */}
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Resume"
+            title="Resume"
+            className="border-border text-foreground hover:border-primary hover:text-primary flex h-9 w-9 items-center justify-center rounded-full border transition-colors md:hidden"
+          >
+            <FileUser size={17} aria-hidden="true" />
           </a>
           <button
             type="button"

@@ -25,7 +25,7 @@ export function Hero() {
 
   return (
     <section id="top" className="pt-16 sm:pt-24">
-      <Container className="grid items-center gap-10 py-12 sm:py-20 md:grid-cols-[3fr_2fr]">
+      <Container className="grid items-center gap-10 py-12 sm:py-20 md:grid-cols-[3fr_2fr] md:items-start">
         <motion.div initial="hidden" animate={show} variants={staggerChildren}>
           <motion.h1
             variants={fadeUp}
@@ -40,9 +40,21 @@ export function Hero() {
             {profile.summary}
           </motion.p>
 
-          <motion.p variants={fadeUp} className="text-muted-foreground mt-6 text-sm">
-            {profile.availability}
-          </motion.p>
+          {/* Proof points - each one is backed by a project / architecture case. */}
+          <motion.ul
+            variants={fadeUp}
+            aria-label="Highlights"
+            className="mt-6 flex max-w-xl flex-wrap gap-2"
+          >
+            {profile.highlights.map((item) => (
+              <li
+                key={item}
+                className="border-border text-foreground/85 rounded-full border px-3 py-1 font-mono text-xs"
+              >
+                {item}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.div variants={fadeUp} className="mt-4 flex flex-wrap items-center gap-3">
             <DrawOutlineButton as="a" href="#contact" onClick={handleAnchorClick("contact")}>
@@ -60,12 +72,22 @@ export function Hero() {
         >
           <div className="relative h-64 w-64 sm:h-80 sm:w-80">
             <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              {/* Theme picks the portrait in CSS, so there's no flash of the
+                  wrong one before the theme script runs. */}
+              <Image
+                src={profile.photoLight}
+                alt={`${profile.name} portrait`}
+                fill
+                sizes="(min-width: 640px) 320px, 256px"
+                className="object-cover dark:hidden"
+                priority
+              />
               <Image
                 src={profile.photo}
                 alt={`${profile.name} portrait`}
                 fill
                 sizes="(min-width: 640px) 320px, 256px"
-                className="object-cover"
+                className="hidden object-cover dark:block"
                 priority
               />
             </div>

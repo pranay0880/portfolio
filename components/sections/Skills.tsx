@@ -4,7 +4,7 @@ import { Caveat } from "next/font/google";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { techStack, type TechCategory } from "@/lib/content";
+import { techStack, type Depth, type TechCategory } from "@/lib/content";
 import { fadeUp, staggerChildren, viewportOnce } from "@/lib/motion";
 
 const caveat = Caveat({ subsets: ["latin"], weight: ["600", "700"] });
@@ -38,13 +38,12 @@ const DUST = [
   { top: "40%", left: "95%", size: 3, duration: 8.5 },
 ];
 
-function getRank(level: number) {
-  if (level >= 95) return "S+";
-  if (level >= 85) return "S";
-  if (level >= 75) return "A";
-  if (level >= 65) return "B";
-  return "C";
-}
+// Ink colour per depth, so the stamp reads at a glance.
+const DEPTH_INK: Record<Depth, string> = {
+  Primary: "#7a1414",
+  Proficient: "#1d3f6e",
+  Familiar: "#4a4a4a",
+};
 
 function Pin() {
   return (
@@ -56,21 +55,19 @@ function Pin() {
 
 function Tape() {
   return (
-    <span className="absolute -top-3 left-1/2 z-20 h-6 w-16 -translate-x-1/2 -rotate-2 border border-black/5 bg-foreground/10 shadow-sm backdrop-blur-[1px]" />
+    <span className="bg-foreground/10 absolute -top-3 left-1/2 z-20 h-6 w-16 -translate-x-1/2 -rotate-2 border border-black/5 shadow-sm backdrop-blur-[1px]" />
   );
 }
 
 function StickyNote({
   category,
   icon: Icon,
-  level,
-  quote,
+  depth,
   items,
   index,
 }: TechCategory & { index: number }) {
   const layout = NOTE_LAYOUT[index % NOTE_LAYOUT.length];
   const paper = PAPER_TONES[index % PAPER_TONES.length];
-  const rank = getRank(level);
 
   return (
     <motion.div
@@ -98,8 +95,7 @@ function StickyNote({
         <span
           className="pointer-events-none absolute right-0 bottom-0 z-10 h-8 w-8 [clip-path:polygon(100%_0,100%_100%,0_100%)]"
           style={{
-            background:
-              "linear-gradient(315deg, rgba(255,255,255,0.55), rgba(0,0,0,0.12) 70%)",
+            background: "linear-gradient(315deg, rgba(255,255,255,0.55), rgba(0,0,0,0.12) 70%)",
             boxShadow: "-2px -2px 6px rgba(0,0,0,0.25)",
           }}
         />
@@ -109,11 +105,12 @@ function StickyNote({
             <Icon size={18} className="text-black/70" />
             <h3 className={`${caveat.className} text-2xl leading-none font-bold`}>{category}</h3>
           </div>
+          {/* Depth stamp - how much real use this has seen. */}
           <span
-            className={`${caveat.className} flex h-11 w-11 shrink-0 rotate-6 items-center justify-center rounded-full border-2 border-black/30 text-xl font-bold text-black/70`}
-            style={{ boxShadow: "inset 0 0 0 2px rgba(0,0,0,0.08)" }}
+            className="shrink-0 rotate-6 rounded-sm border-2 px-1.5 py-0.5 font-mono text-[10px] leading-tight font-bold tracking-wider uppercase"
+            style={{ color: DEPTH_INK[depth], borderColor: DEPTH_INK[depth], opacity: 0.85 }}
           >
-            {rank}
+            {depth}
           </span>
         </div>
 
@@ -125,10 +122,6 @@ function StickyNote({
             </li>
           ))}
         </ul>
-
-        <p className={`${caveat.className} relative text-lg leading-tight text-black/70`}>
-          &ldquo;{quote}&rdquo;
-        </p>
       </motion.div>
     </motion.div>
   );
@@ -139,33 +132,38 @@ export function Skills() {
     <section id="skills" className="scroll-mt-16 py-16 sm:py-24">
       <Container>
         <SectionHeading
-          eyebrow="Skill Progression"
+          eyebrow="Abilities"
           title="Technologies I work with"
-          description="Pinned up like notes on my wall - the stack, the current rank, and the motto that keeps me grinding."
+          description="Pinned up like notes on my wall - each stack and how deep I go with it."
         />
 
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-[radial-gradient(circle,var(--color-border)_1px,transparent_1px)] bg-[length:18px_18px] p-6 sm:p-10">
+        <div className="border-border relative overflow-hidden rounded-2xl border bg-[radial-gradient(circle,var(--color-border)_1px,transparent_1px)] bg-[length:18px_18px] p-6 sm:p-10">
           {DUST.map((d, i) => (
             <motion.span
               key={i}
               aria-hidden
-              className="pointer-events-none absolute rounded-full bg-foreground/40 blur-[1px]"
+              className="bg-foreground/40 pointer-events-none absolute rounded-full blur-[1px]"
               style={{ top: d.top, left: d.left, width: d.size, height: d.size }}
               animate={{ y: [0, -16, 0], opacity: [0.1, 0.45, 0.1] }}
-              transition={{ duration: d.duration, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
+              transition={{
+                duration: d.duration,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.6,
+              }}
             />
           ))}
           <div
             aria-hidden
-            className="pointer-events-none absolute bottom-4 right-6 opacity-20 sm:bottom-8 sm:right-10"
+            className="pointer-events-none absolute right-6 bottom-4 opacity-20 sm:right-10 sm:bottom-8"
           >
             <span
-              className="inline-block bg-foreground"
+              className="bg-foreground inline-block"
               style={{
                 width: 120,
                 height: 120,
-                WebkitMaskImage: "url(/images/logo-mark-tight.png)",
-                maskImage: "url(/images/logo-mark-tight.png)",
+                WebkitMaskImage: "url(/images/logo-mark-tight.webp)",
+                maskImage: "url(/images/logo-mark-tight.webp)",
                 WebkitMaskSize: "contain",
                 maskSize: "contain",
                 WebkitMaskRepeat: "no-repeat",
@@ -177,7 +175,7 @@ export function Skills() {
           </div>
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -z-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
+            className="bg-primary/10 pointer-events-none absolute -z-0 h-72 w-72 rounded-full blur-3xl"
             animate={{ x: ["-10%", "60%", "-10%"], y: ["0%", "40%", "0%"] }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
           />

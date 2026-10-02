@@ -15,7 +15,7 @@ export function DrawOutlineButton<T extends ElementType = "a">({
 
   return (
     <Component
-      className={`group relative inline-flex items-center justify-center gap-2 border border-border px-5 py-2.5 font-mono text-sm font-medium text-foreground ${className}`}
+      className={`group border-border text-foreground relative inline-flex items-center justify-center gap-2 border px-5 py-2.5 font-mono text-sm font-medium ${className}`}
       {...props}
     >
       <svg
@@ -32,7 +32,7 @@ export function DrawOutlineButton<T extends ElementType = "a">({
           strokeWidth={2}
           vectorEffect="non-scaling-stroke"
           strokeDasharray={100}
-          className="[stroke-dashoffset:100] transition-[stroke-dashoffset] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-focus-visible:[stroke-dashoffset:0]"
+          className="transition-[stroke-dashoffset] duration-500 ease-out [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] group-focus-visible:[stroke-dashoffset:0]"
         />
       </svg>
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>

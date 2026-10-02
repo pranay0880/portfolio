@@ -24,7 +24,7 @@ export function About() {
           >
             <motion.div
               variants={fadeUp}
-              className="max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground [&_strong]:bg-primary/20 [&_strong]:text-primary [&_strong]:px-1.5 [&_strong]:py-0.5 [&_strong]:rounded"
+              className="text-muted-foreground [&_strong]:bg-primary/20 [&_strong]:text-primary max-w-2xl space-y-4 text-base leading-relaxed [&_strong]:rounded [&_strong]:px-1.5 [&_strong]:py-0.5"
             >
               {profile.bio.map((paragraph) => (
                 <p key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
@@ -61,17 +61,17 @@ export function About() {
               <motion.div
                 key={item.label}
                 variants={fadeUp}
-                className="group border border-border p-2 hover:border-primary/50 hover:shadow-lg"
+                className="group border-border hover:border-primary/50 border p-2 hover:shadow-lg"
               >
                 <div className="relative flex items-center justify-between">
-                  <p className="relative text-sm text-muted-foreground">{item.subtitle}</p>
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <p className="text-muted-foreground relative text-sm">{item.subtitle}</p>
+                  <span className="bg-primary/10 text-primary flex h-6 w-6 items-center justify-center rounded-full">
                     <item.icon size={12} />
                   </span>
                 </div>
 
-                <p className="relative mt-1 text-2xl font-bold text-foreground">
-                  <span className="font-mono text-primary">{item.value}</span>
+                <p className="text-foreground relative mt-1 text-2xl font-bold">
+                  <span className="text-primary font-mono">{item.value}</span>
                   {item.unit ? <> {item.unit}</> : null}
                 </p>
               </motion.div>

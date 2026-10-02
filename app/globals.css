@@ -15,25 +15,29 @@
  *   10% accent    -> primary (buttons, links, active states)
  */
 :root {
-  --background: #F1DEC4;
+  --background: #f1dec4;
   --foreground: #000000; /*color*/
-  --surface: #F1DEC4; /*Elevated/container background --> Cards, navbar, panels*/
-  --surface-muted: color-mix(in srgb, #393e46 12%, #F1DEC4); /*Subtle surface --> Secondary cards, inputs*/
-  --border: color-mix(in srgb, #393e46 25%, #F1DEC4);
-  --primary: #BD4444;
-  --primary-foreground: #F1DEC4;
-  --muted-foreground: color-mix(in srgb, #222831 65%, #F1DEC4);
+  --surface: #f1dec4; /*Elevated/container background --> Cards, navbar, panels*/
+  --surface-muted: color-mix(
+    in srgb,
+    #393e46 12%,
+    #f1dec4
+  ); /*Subtle surface --> Secondary cards, inputs*/
+  --border: color-mix(in srgb, #393e46 25%, #f1dec4);
+  --primary: #bd4444;
+  --primary-foreground: #f1dec4;
+  --muted-foreground: color-mix(in srgb, #222831 65%, #f1dec4);
 }
 
 .dark {
   --background: #000000;
-  --foreground: #F1DEC4;
+  --foreground: #f1dec4;
   --surface: #393e46;
   --surface-muted: #393e46;
-  --border: color-mix(in srgb, #F1DEC4 15%, #393e46);
-  --primary: #BD4444;
-  --primary-foreground: #F1DEC4;
-  --muted-foreground: color-mix(in srgb, #F1DEC4 65%, #222831);
+  --border: color-mix(in srgb, #f1dec4 15%, #393e46);
+  --primary: #bd4444;
+  --primary-foreground: #f1dec4;
+  --muted-foreground: color-mix(in srgb, #f1dec4 65%, #222831);
 }
 
 @theme inline {
@@ -53,11 +57,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M13 9 L5 16 L13 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6 L13 26" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round"/><path d="M19 9 L27 16 L19 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>') 16 16, auto;
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M13 9 L5 16 L13 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6 L13 26" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round"/><path d="M19 9 L27 16 L19 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+      16 16,
+    auto;
 }
 
-a, button, [role="button"] {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M13 9 L5 16 L13 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6 L13 26" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round"/><path d="M19 9 L27 16 L19 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>') 16 16, pointer;
+a,
+button,
+[role="button"] {
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M13 9 L5 16 L13 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 6 L13 26" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round"/><path d="M19 9 L27 16 L19 23" fill="none" stroke="%23BD4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+      16 16,
+    pointer;
 }
 
 /* The CSS cursor above is the fallback for touch devices, no-JS, and

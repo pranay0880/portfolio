@@ -10,10 +10,10 @@ import { fadeUp, staggerChildren, viewportOnce } from "@/lib/motion";
 
 function ChipRow({ label, items }: { label: string; items: string[] }) {
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
-      <span className="text-sm font-medium text-muted-foreground">{label}:</span>
+    <div className="text-muted-foreground mt-3 flex flex-wrap items-center gap-x-2 text-sm">
+      <span className="text-muted-foreground text-sm font-medium">{label}:</span>
       {items.map((item, i) => (
-        <span key={item} className={i > 0 ? "border-l-2 border-primary pl-3" : ""}>
+        <span key={item} className={i > 0 ? "border-primary border-l-2 pl-3" : ""}>
           {item}
         </span>
       ))}
@@ -26,7 +26,7 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
 
   return (
     <motion.div variants={fadeUp} className="relative pl-20 sm:pl-24">
-      <span className="absolute top-0.5 left-0 w-12 text-right font-mono text-xs text-muted-foreground sm:w-16 pr-1 pt-0.5">
+      <span className="text-muted-foreground absolute top-0.5 left-0 w-12 pt-0.5 pr-1 text-right font-mono text-xs sm:w-16">
         {node.year}
       </span>
 
@@ -42,22 +42,24 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
           className="relative flex h-6 w-6 items-center justify-center rounded-full"
           whileHover={{ scale: 1.35 }}
           animate={{
-            boxShadow: [
-              "0 0 0 0 rgba(189,68,68,0.4)",
-              "0 0 0 6px rgba(189,68,68,0)",
-            ],
+            boxShadow: ["0 0 0 0 rgba(189,68,68,0.4)", "0 0 0 6px rgba(189,68,68,0)"],
           }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut", delay: index * 0.5 + 0.6 }}
+          transition={{
+            duration: 2.8,
+            repeat: Infinity,
+            ease: "easeOut",
+            delay: index * 0.5 + 0.6,
+          }}
         >
-          <div className="absolute inset-0 rounded-full border-2 border-primary bg-background" />
+          <div className="border-primary bg-background absolute inset-0 rounded-full border-2" />
           <span
             aria-hidden
-            className="relative inline-block bg-primary"
+            className="bg-primary relative inline-block"
             style={{
               width: 14,
               height: 14,
-              WebkitMaskImage: "url(/images/logo-mark-tight.png)",
-              maskImage: "url(/images/logo-mark-tight.png)",
+              WebkitMaskImage: "url(/images/logo-mark-tight.webp)",
+              maskImage: "url(/images/logo-mark-tight.webp)",
               WebkitMaskSize: "contain",
               maskSize: "contain",
               WebkitMaskRepeat: "no-repeat",
@@ -69,31 +71,31 @@ function TimelineRow({ node, index }: { node: TimelineNode; index: number }) {
         </motion.div>
       </motion.div>
 
-      <h3 className="text-xl font-semibold text-foreground sm:text-2xl">{node.title}</h3>
-      {node.role ? <p className="mt-0.5 text-sm text-muted-foreground">{node.role}</p> : null}
+      <h3 className="text-foreground text-xl font-semibold sm:text-2xl">{node.title}</h3>
+      {node.role ? <p className="text-muted-foreground mt-0.5 text-sm">{node.role}</p> : null}
       {node.scope ? (
-        <p className="mt-2 max-w-xl text-sm text-muted-foreground">{node.scope}</p>
+        <p className="text-muted-foreground mt-2 max-w-xl text-sm">{node.scope}</p>
       ) : null}
 
       {node.projects ? (
         projectsHaveBlurb ? (
           <div className="mt-2 space-y-1">
             {node.projects.map((project) => (
-              <p key={project.name} className="text-sm text-muted-foreground">
-                <span className="font-medium text-foreground">{project.name}</span>
+              <p key={project.name} className="text-muted-foreground text-sm">
+                <span className="text-foreground font-medium">{project.name}</span>
                 {project.blurb ? <> - {project.blurb}</> : null}
               </p>
             ))}
           </div>
         ) : (
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             {node.projects.map((p) => p.name).join(" · ")}
           </p>
         )
       ) : null}
 
       {node.bullets ? (
-        <ul className="mt-2 max-w-xl list-disc space-y-1 pl-4 text-sm text-muted-foreground">
+        <ul className="text-muted-foreground mt-2 max-w-xl list-disc space-y-1 pl-4 text-sm">
           {node.bullets.map((bullet) => (
             <li key={bullet}>{bullet}</li>
           ))}
@@ -118,34 +120,34 @@ export function Experience() {
       <Container>
         <SectionHeading
           eyebrow="Journey"
-          title="Building, Shipping, Growing."
-          description="From self-directed learning to production applications and full-stack ownership."
+          title="How my responsibility grew"
+          description="From shipping features to building core parts of platforms, leading a frontend and designing systems."
         />
 
         <div ref={containerRef} className="relative">
           <div
             aria-hidden
-            className="absolute top-0 bottom-0 left-[56px] w-1 rounded-full bg-border sm:left-[72px]"
+            className="bg-border absolute top-0 bottom-0 left-[56px] w-1 rounded-full sm:left-[72px]"
           />
           <motion.div
             aria-hidden
-            className="absolute top-0 left-[56px] w-1 origin-top rounded-full bg-primary/40 blur-[4px] sm:left-[72px]"
+            className="bg-primary/40 absolute top-0 left-[56px] w-1 origin-top rounded-full blur-[4px] sm:left-[72px]"
             style={{ scaleY: scrollYProgress, height: "100%" }}
           />
           <motion.div
             aria-hidden
-            className="absolute top-0 left-[56px] w-1 origin-top overflow-hidden rounded-full bg-gradient-to-b from-primary/50 to-primary sm:left-[72px]"
+            className="from-primary/50 to-primary absolute top-0 left-[56px] w-1 origin-top overflow-hidden rounded-full bg-gradient-to-b sm:left-[72px]"
             style={{ scaleY: scrollYProgress, height: "100%" }}
           >
             <motion.span
               aria-hidden
-              className="absolute left-1/2 h-20 w-3 -translate-x-1/2 rounded-full bg-primary/80 blur-[6px]"
+              className="bg-primary/80 absolute left-1/2 h-20 w-3 -translate-x-1/2 rounded-full blur-[6px]"
               animate={{ top: ["-8%", "100%"] }}
               transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.span
               aria-hidden
-              className="absolute left-1/2 h-20 w-3 -translate-x-1/2 rounded-full bg-primary/80 blur-[6px]"
+              className="bg-primary/80 absolute left-1/2 h-20 w-3 -translate-x-1/2 rounded-full blur-[6px]"
               animate={{ top: ["-8%", "100%"] }}
               transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
             />
@@ -177,7 +179,7 @@ export function Experience() {
               >
                 <ChevronDown size={14} className="text-primary" />
               </motion.span>
-              <p className="font-mono text-xs font-semibold tracking-wide text-primary uppercase">
+              <p className="text-primary font-mono text-xs font-semibold tracking-wide uppercase">
                 {currentlyBuilding.label}
               </p>
             </div>

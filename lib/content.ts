@@ -1,12 +1,29 @@
-import { Clock, Cloud, Code2, Database, Layers, Server, Sparkles, type LucideIcon } from "lucide-react";
+import {
+  Clock,
+  Code2,
+  Database,
+  Layers,
+  Network,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 
 export const profile = {
   name: "Pranay Dasari",
   title: "Full Stack Developer",
-  availability: "Curious, Learning, Growing",
-  tagline: "Full Stack Developer - Building with Purpose.",
+  tagline: "Full Stack Engineer · Enterprise React & Next.js",
   summary:
-    "3+ years building across React, Next.js, and Node.js - shipping features that scale and code that lasts. Off-duty anime fan, convinced that great software and great anime follow the same formula: solid characters, good pacing, and a satisfying ending.",
+    "3+ years shipping enterprise applications, modernizing SAP workflows for Johnson & Johnson with a microfrontend architecture, and leading the frontend of Liberty Dental Plan's Next.js and TypeScript apps. I own application areas end to end, build role-based systems and AI features, and mentor junior developers.",
+  // Proof points shown under the hero summary - each backed by a project below.
+  highlights: [
+    "Frontend lead",
+    "Microfrontend architecture",
+    "Role-based access control",
+    "Application ownership",
+    "Mentoring",
+  ],
   bio: [
     "My story started with curiosity about how things work, and turned into a habit of <strong>building products</strong> that solve real problems.",
     "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend with a focus on <strong>scalable architecture</strong> that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
@@ -19,7 +36,9 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/pranay-dasari0880/",
     github: "https://github.com/pranay0880",
   },
-  photo: "/images/profile.png",
+  photo: "/images/profile.webp",
+  // Watercolour portrait on cream paper - matches the light theme.
+  photoLight: "/images/profile-portrait-light-2.webp",
 } as const;
 
 export type CharacterStat = {
@@ -36,59 +55,63 @@ export const characterStats: CharacterStat[] = [
   { label: "Beyond Code", subtitle: "What inspires me", value: "Anime × Code", icon: Sparkles },
 ];
 
+// How deep the experience goes - a competency model, not a score.
+export type Depth = "Primary" | "Proficient" | "Familiar";
+
 export type TechCategory = {
   category: string;
   icon: LucideIcon;
-  level: number;
-  quote: string;
+  depth: Depth;
   items: string[];
 };
 
+// The strongest, most in-demand skills from the resume - curated, not exhaustive.
 export const techStack: TechCategory[] = [
   {
     category: "Frontend",
     icon: Code2,
-    level: 99,
-    quote: "Building smooth experiences.",
-    items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Bootstrap",
-      "Material UI",
-      "Tailwind CSS",
-    ],
+    depth: "Primary",
+    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Material UI"],
+  },
+  {
+    category: "Architecture",
+    icon: Network,
+    depth: "Proficient",
+    items: ["Microfrontends", "System design", "Responsive design", "Performance optimization"],
   },
   {
     category: "Backend",
     icon: Server,
-    level: 75,
-    quote: "Powering the world behind the UI.",
-    items: ["Python", "Express", "Node.js"],
+    depth: "Proficient",
+    items: ["Node.js", "REST APIs", "Socket.IO", "Redis", "Kafka"],
   },
   {
-    category: "Database",
+    category: "Databases",
     icon: Database,
-    level: 70,
-    quote: "Data is the true source of power.",
-    items: ["PostgreSQL", "MongoDB", "SQLite"],
+    depth: "Proficient",
+    items: ["MongoDB", "PostgreSQL", "SQL"],
   },
   {
-    category: "DevOps",
-    icon: Cloud,
-    level: 55,
-    quote: "Automating deployments.",
-    items: ["Azure", "Docker", "GitHub Actions", "CI/CD", "Vercel"],
+    category: "Auth & Security",
+    icon: ShieldCheck,
+    depth: "Proficient",
+    items: ["OAuth / SSO", "JWT", "RBAC", "Audit logging", "KPI metrics"],
   },
   {
-    category: "Others",
+    // Cloud, quality and everyday tooling on one note.
+    category: "Cloud, Quality & Tools",
     icon: Layers,
-    level: 80,
-    quote: "Always learning.",
-    items: ["Git", "GitHub", "Jira", "Bitbucket"],
+    depth: "Familiar",
+    items: [
+      "Azure",
+      "Infrastructure as code (Bicep)",
+      "GitHub Actions",
+      "Jest",
+      "Accessibility (WCAG)",
+      "Lighthouse",
+      "Git",
+      "Jira",
+    ],
   },
 ];
 
@@ -109,62 +132,93 @@ export type TimelineNode = {
   current?: boolean;
 };
 
+// Told as a progression of responsibility, not a list of jobs.
 export const timeline: TimelineNode[] = [
   {
     year: "2023",
-    title: "Self-Learning",
-    role: "Developer Foundations",
+    title: "Foundations",
+    role: "Self-taught developer",
     scope:
-      "Built a foundation in web development through a structured online learning and hands-on projects.",
-    stack: ["HTML", "CSS", "JavaScript", "Python", "React", "Bootstrap"],
+      "Taught myself web development through structured courses and hands-on projects, coming from a civil engineering background.",
+    stack: ["JavaScript", "React", "Python", "HTML & CSS"],
   },
   {
-    year: "Oct 2023",
-    title: "Aapmor",
-    role: "Full Stack Developer",
-    scope:
-      "Started my professional development career working on enterprise and internal applications, initially focused on React and the MERN stack.",
-    projects: [{ name: "J&J" }, { name: "Nexus" }],
+    year: "Sep 2023",
+    title: "Contributor",
+    role: "Full Stack Developer (SDE-1) · Aapmor",
+    scope: "Joined Aapmor shipping production features on enterprise and internal applications.",
+    projects: [{ name: "Johnson & Johnson" }, { name: "Nexus" }],
     bullets: [
-      "Developed and maintained production features using React and MERN.",
-      "Worked collaboratively on enterprise and internal applications.",
-      "Gained experience with production development, API integration, and code quality.",
+      "Modernized legacy SAP workflows into React interfaces for J&J's internal users.",
+      "Delivered features end to end across the MERN stack: UI, APIs and data.",
+      "Learned production delivery: API integration, code quality and release discipline.",
     ],
-    stack: ["React", "JavaScript", "Node.js", "Express", "MongoDB","Materual UI"],
+    stack: ["React", "Node.js", "Express", "MongoDB", "Material UI"],
+  },
+  {
+    year: "2024",
+    title: "Core contributor",
+    role: "From single features to core parts of platforms",
+    projects: [
+      { name: "Nexus", blurb: "Employees, access control and recruitment on one platform." },
+      { name: "Aapmor Blogs", blurb: "Full-stack internal publishing platform." },
+    ],
+    bullets: [
+      "Introduced the microfrontend architecture across 4 J&J modules, so teams could release independently.",
+      "Major contributor to Nexus across 3 domains, including 4-role RBAC and SSO through AuthX.",
+      "Major contributor to Aapmor Blogs, including real-time notifications and OTP/JWT auth.",
+    ],
+    stack: ["Microfrontends", "RBAC", "Socket.IO", "OpenAI"],
   },
   {
     year: "2025",
-    title: "Full Stack Developer",
+    title: "Frontend lead & mentor",
+    role: "Leading the frontend on Liberty Dental Plan (SDE-1)",
     projects: [
-      { name: "Aapmor Blogs", blurb: "Contributed to the development of an internal blogging platform." },
       {
-        name: "Liberty Dental Plan(LDP)",
-        blurb: "Joined the LDP project as a Senior Developer, working across two applications.",
+        name: "Liberty Dental Plan",
+        blurb: "Frontend lead on 2 apps - customer-facing and administrative - live since 2026.",
       },
     ],
     bullets: [
-      "Developed and maintained production features.",
-      "Worked with Next.js, TypeScript, SQL, and Contentful.",
-      "Took ownership of application areas and guided junior developers.",
+      "Led the frontend of 2 Liberty Dental Plan applications in Next.js and TypeScript, taking both live in 2026.",
+      "Mentored 4 junior developers through code review and technical guidance.",
+      "Set development conventions that made delivery more consistent.",
+      "Turned client requirements into technical specs.",
     ],
     stack: ["Next.js", "TypeScript", "SQL", "Contentful"],
   },
   {
     year: "2026",
-    title: "Multi-Project Development",
-    scope:
-      "Continued contributing to J&J and LDP, while expanding into additional products and development environments.",
+    title: "Designing systems",
+    role: "Architecture-level work as an SDE-1",
     projects: [
-      { name: "Quantive", blurb: "Employee Performance Management System." },
-      { name: "Shiftlyn", blurb: "Personal/team product developed outside Aapmor." },
+      { name: "Performance Management System", blurb: "Designed the architecture." },
+      { name: "Aapmor website", blurb: "Led development." },
+      { name: "Shiftlyn", blurb: "SaaS scheduling app - led architecture and requirements." },
     ],
-    focus: ["Full-stack development", "Application ownership", "Mentoring", "Product development"],
+    bullets: [
+      "Designed the architecture of a performance platform: 4-level role hierarchy, weighted scoring and audit logging.",
+      "Led the Aapmor corporate website, focused on performance and accessibility.",
+      "Still contributing to J&J and LDP alongside new products.",
+    ],
+    focus: ["System design", "Application ownership", "Mentoring", "Product development"],
     current: true,
   },
 ];
 
 export const currentlyBuilding = {
-  label: "Always Learning"
+  label: "Always Learning",
+};
+
+/** Senior-engineer view of a project, shown in the case-study drawer. */
+export type CaseStudy = {
+  problem: string;
+  ownership: string[];
+  architecture: string[];
+  /** One key decision, or several. */
+  decision: string | string[];
+  impact: string[];
 };
 
 export type ProjectEntry = {
@@ -172,6 +226,7 @@ export type ProjectEntry = {
   meta: string;
   description: string;
   bullets?: string[];
+  caseStudy: CaseStudy;
   quote: string;
   badge?: string;
   image?: string;
@@ -182,6 +237,51 @@ export type ProjectEntry = {
 
 export const projects: ProjectEntry[] = [
   {
+    title: "Liberty Dental Plan",
+    meta: "AAPMOR TECHNOLOGIES · SALES SITE & MAIN SITE · 2025 TO PRESENT",
+    description:
+      "Liberty Dental Plan's individual sales platform: a public storefront where people shop dental plans by state, find a dentist and check out online - plus an admin dashboard where the business manages plans, content and approvals.",
+    caseStudy: {
+      problem:
+        "Individuals needed to compare and buy dental plans online for their state, and the business needed to change plans, copays, FAQs and pages without a code release - safely, with sign-off and a record of who changed what.",
+      ownership: [
+        "Frontend lead on the Sales app - its top contributor, building across the public storefront and the admin dashboard.",
+        "Shopping, dentist search and checkout flows, including the hand-off to hosted payment and the return path.",
+        "Admin features for plans, FAQs, procedure copays and content pages, with approvals and audit history.",
+        "Contributor to the LDP main site: CMS-driven pages and admin tools.",
+      ],
+      architecture: [
+        "Next.js App Router with separate route groups for the public storefront and the protected admin area.",
+        "Backend-for-frontend: Next.js route handlers proxy every backend call, keeping service credentials on the server.",
+        "Role-based admin with OTP login, an approval workflow, version history and audit logs.",
+        "State-aware, server-rendered plan pages with CMS content (Contentful) and SEO metadata.",
+        "Standalone build shipped to Azure App Service through an Azure pipeline that runs the test suite first.",
+      ],
+      decision: [
+        "Redesigned the checkout flow around the customer - clearer steps and a form that is easy to understand and quick to fill in.",
+        "Restructured the admin flow so admins can view, edit, submit and approve changes with ease, and check every version along the way.",
+      ],
+      impact: [
+        "Live in 2026 - customers shop and buy plans online.",
+        "Business teams update plans and content themselves, with approvals and a full audit trail.",
+        "250+ automated test files gate every build in CI.",
+      ],
+    },
+    quote: "Buying dental cover online.",
+    badge: "Live",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "KendoReact",
+      "Bootstrap",
+      "Contentful",
+      "Accessibility (WCAG)",
+      "Performance optimization",
+      "Jest",
+    ],
+  },
+  {
     title: "Johnson & Johnson",
     meta: "AAPMOR TECHNOLOGIES · ENTERPRISE SAP MODERNIZATION · 2023 TO PRESENT",
     description:
@@ -191,9 +291,37 @@ export const projects: ProjectEntry[] = [
       "Worked on microfrontend architecture to decouple multiple features, reducing dependencies and enabling independent development and deployment, faster releases, and reduced downtime.",
       "Introduced AI-driven language translation features and a KPI analytics dashboard for logs, improving accessibility and UX across diverse regions.",
     ],
+    caseStudy: {
+      problem:
+        "Core business workflows lived in legacy SAP screens, and every feature shipped inside one application - a single change meant redeploying everything.",
+      ownership: [
+        "Modernized SAP workflows into React interfaces for internal J&J users.",
+        "Introduced the microfrontend architecture across 4 modules.",
+        "Built AI-driven localization and a KPI analytics dashboard for logs.",
+      ],
+      architecture: [
+        "Microfrontends: 4 modules with their own build and deployment pipelines.",
+        "React + Material UI frontends over Node.js APIs, with Redis and MongoDB.",
+      ],
+      decision:
+        "Split the frontend into independently deployed microfrontends instead of growing the single app - accepting more pipeline setup in exchange for teams releasing without waiting on each other.",
+      impact: [
+        "Serving 500,000+ users across core business workflows.",
+        "No more full-application redeploys; less deployment-related downtime.",
+        "Localized into 22 languages for international regions.",
+      ],
+    },
     quote: "From legacy SAP screens to a UI people actually enjoy using.",
     badge: "Confidential",
-    stack: ["React", "Node","MongoDB","Material UI", "Microfrontend Architecture", "AI Translation", "Redis"],
+    stack: [
+      "React",
+      "Node",
+      "MongoDB",
+      "Material UI",
+      "Microfrontend Architecture",
+      "AI Translation",
+      "Redis",
+    ],
   },
   {
     title: "Aapmor Blogs",
@@ -206,11 +334,38 @@ export const projects: ProjectEntry[] = [
       "Light/Dark mode toggle and Lottie animations for enhanced UX.",
       "Admin panel for managing blogs, users, and winner announcements; OTP login and JWT-based authentication.",
     ],
+    caseStudy: {
+      problem:
+        "Aapmor needed an internal publishing platform where people could write, share and engage with blogs - with admins able to moderate users and content.",
+      ownership: [
+        "Major contributor across the stack: editor, publishing flow, discovery and admin panel.",
+        "Implemented authentication with OTP login and JWT.",
+      ],
+      architecture: [
+        "React + Node.js + MongoDB.",
+        "Socket.IO for real-time notifications; React-Quill rich-text editor.",
+      ],
+      decision:
+        "Pushed notifications over Socket.IO rather than having clients poll - keeping likes and comments live without hammering the API.",
+      impact: [
+        "Live at blogs.aapmor.com and used across the company.",
+        "Content discovery through trending, liked and most-viewed sections.",
+      ],
+    },
     quote: "A platform where writers thrive and readers discover stories.",
     badge: "Live",
     image: "/images/aapmor-blogs.webp",
     link: "https://blogs.aapmor.com/",
-    stack: ["React", "Node.js", "MongoDB", "Socket.IO", "React-Quill", "JWT", "Lottie", "Material UI"],
+    stack: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Socket.IO",
+      "React-Quill",
+      "JWT",
+      "Lottie",
+      "Material UI",
+    ],
   },
   {
     title: "Performance Management System",
@@ -221,13 +376,40 @@ export const projects: ProjectEntry[] = [
       "Built role-based access control with Admin, Manager, Lead, and Employee roles supporting granular permissions.",
       "Implemented multi-level approval workflows and quarterly evaluation cycles with weighted scoring logic.",
       "Developed dynamic scoring engine combining competency and technical goal performance into a unified performance score.",
-      "Architected achievement tracking system with role-based feedback and notification mechanisms.",
+      "Designed an achievement tracking system with role-based feedback and notification mechanisms.",
       "Created admin analytics dashboard for performance trends, team comparisons, and goal completion metrics.",
       "Implemented comprehensive audit logging for compliance and performance tracking.",
     ],
-    quote: "Where performance meets growth through intelligent feedback and transparent evaluation.",
+    caseStudy: {
+      problem:
+        "Performance reviews across four levels of hierarchy needed one consistent, auditable process instead of scattered feedback.",
+      ownership: [
+        "Designed the platform architecture and its core modules.",
+        "Designed the weighted scoring engine and multi-level approval workflow.",
+      ],
+      architecture: [
+        "4-level role hierarchy (Admin, Manager, Lead, Employee) with granular access control.",
+        "Audit logging on user actions; quarterly evaluation cycles; admin analytics dashboard.",
+      ],
+      decision:
+        "Combined competency ratings and technical goal achievement into one weighted score, so every role is evaluated on the same scale.",
+      impact: [
+        "One platform running quarterly evaluations across all four roles.",
+        "Every action traceable through the audit log.",
+      ],
+    },
+    quote:
+      "Where performance meets growth through intelligent feedback and transparent evaluation.",
     badge: "Internal",
-    stack: ["React", "Node.js", "MongoDB", "REST API", "Material UI", "Chart.js", "Role-Based Access Control"],
+    stack: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "REST API",
+      "Material UI",
+      "Chart.js",
+      "Role-Based Access Control",
+    ],
   },
   {
     title: "Internal Tools & Side Projects",
@@ -240,8 +422,27 @@ export const projects: ProjectEntry[] = [
       "Nexus - Employee Management: Add, edit, and delete users based on role-based access control with comprehensive audit trails.",
       "Nexus - Recruitment Module: Manage new joiners, interview scheduling, and selection process with workflow automation.",
       "Nexus - AI Chatbot: Integrated OpenAI chatbot for answering employee queries from internal documentation, improving employee experience.",
-      "Shiftlyn: Modern SaaS scheduling application enabling efficient team scheduling, shift management, and employee availability tracking.",
+      "Shiftlyn: SaaS scheduling application for team scheduling, shift management and availability tracking - I led its architecture and requirements.",
     ],
+    caseStudy: {
+      problem:
+        "Employee management, access control and recruitment were separate concerns that needed one secure internal platform - plus a faster company website.",
+      ownership: [
+        "Major contributor to Nexus across 3 domains: employees, access control and recruitment.",
+        "Led development of the Aapmor corporate website.",
+        "Led architecture and requirements for Shiftlyn, a SaaS scheduling app - turning scheduling needs into the system design.",
+      ],
+      architecture: [
+        "RBAC with 4 roles (Super Admin, Admin, Lead, Employee) and role-specific dashboards.",
+        "SSO through AuthX; OpenAI chatbot grounded in internal documentation.",
+      ],
+      decision:
+        "Integrated SSO through AuthX instead of building a separate login - one identity across tools, with permissions scoped by role.",
+      impact: [
+        "Three internal domains run from one platform.",
+        "Employees get answers from internal docs through the chatbot.",
+      ],
+    },
     quote: "Building tools that make teams work smarter, not harder.",
     badge: "Live",
     image: "/images/project-aapmor.webp",
@@ -249,11 +450,22 @@ export const projects: ProjectEntry[] = [
       { label: "Aapmor Website", url: "https://aapmor.com/" },
       { label: "Shiftlyn", url: "https://shiftlyn.com/" },
     ],
-    stack: ["React", "Node.js", "MongoDB", "Material UI", "Framer Motion", "RBAC", "AuthX", "OpenAI", "REST API", "TypeScript"],
+    stack: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Material UI",
+      "Framer Motion",
+      "RBAC",
+      "AuthX",
+      "OpenAI",
+      "REST API",
+      "TypeScript",
+    ],
   },
   {
     title: "Personal Portfolio",
-    meta: "PERSONAL PROJECT · FULL-STACK PORTFOLIO · V1 (2023) & V2 (2026)",
+    meta: "PERSONAL PROJECT · FULL-STACK PORTFOLIO · V1 (2024) & V2 (2026)",
     description:
       "Evolution of personal portfolio showcasing professional work and skills. V1 built with React highlighting career journey. V2 redesigned with Next.js, TypeScript, and modern animations for a polished, interactive experience with real-time contact form integration.",
     bullets: [
@@ -264,6 +476,22 @@ export const projects: ProjectEntry[] = [
       "Responsive design with light/dark mode toggle and mobile-optimized layouts using Tailwind CSS.",
       "Deployed V2 on Azure App Service with PostgreSQL database and Application Insights monitoring.",
     ],
+    caseStudy: {
+      problem:
+        "A portfolio that shows engineering depth, not just design - and is production-grade itself.",
+      ownership: ["Designed and built it solo, from UI to infrastructure."],
+      architecture: [
+        "Next.js App Router + TypeScript, Tailwind CSS, Framer Motion.",
+        "Contact pipeline: React Hook Form + Zod -> Prisma/PostgreSQL -> Resend email.",
+        "Azure App Service + PostgreSQL Flexible Server, provisioned with Bicep.",
+      ],
+      decision:
+        "One Zod schema validates the contact form on both client and server, so the two can never drift apart.",
+      impact: [
+        "Live at pranaydasari.in.",
+        "Per-submission email delivery status tracked in the database.",
+      ],
+    },
     quote: "A developer's portfolio is their digital handshake - make it memorable.",
     badge: "Live",
     image: "/images/portfolio-v2.webp",
@@ -271,7 +499,18 @@ export const projects: ProjectEntry[] = [
       { label: "V2 (Current)", url: "https://pranaydasari.in/" },
       { label: "V1 (Archive)", url: "https://pradeep-dasari.vercel.app/" },
     ],
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Prisma", "PostgreSQL", "Resend", "Azure", "Vercel"],
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Prisma",
+      "PostgreSQL",
+      "Resend",
+      "Azure",
+      "Vercel",
+    ],
   },
 ];
 

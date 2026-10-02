@@ -2,7 +2,7 @@ import type { Ref } from "react";
 
 export type ZoroState = "run" | "stand" | "sleep" | "walk" | "lost" | "turn" | "stop";
 
-// Frames per strip in public/cursor/zoro-{state}.png. Every strip is drawn at
+// Frames per strip in public/cursor/zoro-{state}.webp. Every strip is drawn at
 // the same scale with feet on the bottom edge, so swapping sheets never
 // shifts his size or baseline. run/sleep use 172x126 cells; the rest use
 // 172x150 cells (extra headroom for the "?" marks) - see cursor.css.
@@ -22,7 +22,7 @@ export const ZORO_WIDTH = Math.round((ZORO_HEIGHT * 172) / 126);
 // without this browsers keep showing the cached old strip (misaligned
 // against the new frame count).
 const SHEET_VERSION = 6;
-export const zoroSheetUrl = (state: ZoroState) => `/cursor/zoro-${state}.png?v=${SHEET_VERSION}`;
+export const zoroSheetUrl = (state: ZoroState) => `/cursor/zoro-${state}.webp?v=${SHEET_VERSION}`;
 
 const sheetVars = Object.fromEntries(
   (Object.keys(ZORO_SHEETS) as ZoroState[]).map((state) => [

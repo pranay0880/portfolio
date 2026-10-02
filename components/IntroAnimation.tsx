@@ -60,7 +60,7 @@ export function IntroAnimation() {
     <AnimatePresence>
       {active ? (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
+          className="bg-background fixed inset-0 z-[100] flex items-center justify-center"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
@@ -77,7 +77,7 @@ export function IntroAnimation() {
                   layout
                   animate={{ x: slashesSpread ? 10 : 0 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="inline-flex items-baseline text-primary"
+                  className="text-primary inline-flex items-baseline"
                 >
                   <span>&lt;</span>
 
@@ -94,7 +94,7 @@ export function IntroAnimation() {
                 {stage === "tag" ? (
                   <motion.span
                     layout
-                    className="px-1 text-foreground"
+                    className="text-foreground px-1"
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -107,7 +107,7 @@ export function IntroAnimation() {
                   layout
                   animate={{ x: slashesSpread ? -10 : 0 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="inline-flex items-baseline text-primary"
+                  className="text-primary inline-flex items-baseline"
                 >
                   {stage === "addSlash" || offsetSlashes ? (
                     <motion.span

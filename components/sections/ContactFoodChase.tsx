@@ -5,12 +5,12 @@ import { useEffect, useRef, useState } from "react";
 // Sprites: the 8-frame run strip is shared with the navbar chase; the rest
 // are single frames cut from the same Luffy sheet (so one SCALE fits all).
 const SHEETS = {
-  run: { src: "/navbar/luffy-run.png", frames: 8, w: 142, h: 113 },
-  alert: { src: "/contact/luffy-alert.png", frames: 1, w: 97, h: 93 },
-  dive: { src: "/contact/luffy-dive.png", frames: 1, w: 129, h: 64 },
+  run: { src: "/navbar/luffy-run.webp", frames: 8, w: 142, h: 113 },
+  alert: { src: "/contact/luffy-alert.webp", frames: 1, w: 97, h: 93 },
+  dive: { src: "/contact/luffy-dive.webp", frames: 1, w: 129, h: 64 },
 } as const;
 type SheetKey = keyof typeof SHEETS;
-const MEAT = { src: "/contact/meat.png", w: 75, h: 46 };
+const MEAT = { src: "/contact/meat.webp", w: 75, h: 46 };
 
 // Source art -> on-screen px (Luffy ~34px tall); the meat is drawn larger
 // than life so it reads at this size.

@@ -14,12 +14,12 @@ export function LogoMark({ size = 28, className = "", id }: LogoMarkProps) {
     <span
       id={id}
       aria-hidden="true"
-      className={`inline-block bg-primary ${className}`}
+      className={`bg-primary inline-block ${className}`}
       style={{
         width: size,
         height: size,
-        WebkitMaskImage: "url(/images/logo-mark.png)",
-        maskImage: "url(/images/logo-mark.png)",
+        WebkitMaskImage: "url(/images/logo-mark.webp)",
+        maskImage: "url(/images/logo-mark.webp)",
         WebkitMaskSize: "contain",
         maskSize: "contain",
         WebkitMaskRepeat: "no-repeat",
