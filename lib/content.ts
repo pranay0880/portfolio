@@ -102,16 +102,7 @@ export const techStack: TechCategory[] = [
     category: "Cloud, Quality & Tools",
     icon: Layers,
     depth: "Familiar",
-    items: [
-      "Azure",
-      "Infrastructure as code (Bicep)",
-      "GitHub Actions",
-      "Jest",
-      "Accessibility (WCAG)",
-      "Lighthouse",
-      "Git",
-      "Jira",
-    ],
+    items: ["Azure", "GitHub Actions", "Jest", "Accessibility (WCAG)", "Lighthouse", "Git", "Jira"],
   },
 ];
 
@@ -269,6 +260,8 @@ export const projects: ProjectEntry[] = [
     },
     quote: "Buying dental cover online.",
     badge: "Live",
+    // Blurred on purpose - client work.
+    image: "/images/project-ldp.webp",
     stack: [
       "Next.js",
       "React",
@@ -313,6 +306,8 @@ export const projects: ProjectEntry[] = [
     },
     quote: "From legacy SAP screens to a UI people actually enjoy using.",
     badge: "Confidential",
+    // Blurred on purpose - client work under NDA.
+    image: "/images/project-jnj.webp",
     stack: [
       "React",
       "Node",
@@ -401,6 +396,8 @@ export const projects: ProjectEntry[] = [
     quote:
       "Where performance meets growth through intelligent feedback and transparent evaluation.",
     badge: "Internal",
+    // Blurred on purpose - internal tool.
+    image: "/images/project-pms.webp",
     stack: [
       "React",
       "Node.js",
@@ -444,12 +441,10 @@ export const projects: ProjectEntry[] = [
       ],
     },
     quote: "Building tools that make teams work smarter, not harder.",
-    badge: "Live",
-    image: "/images/project-aapmor.webp",
-    links: [
-      { label: "Aapmor Website", url: "https://aapmor.com/" },
-      { label: "Shiftlyn", url: "https://shiftlyn.com/" },
-    ],
+    badge: "Internal",
+    // Blurred on purpose - company site.
+    image: "/images/project-aapmor-blur.webp",
+    links: [{ label: "Shiftlyn", url: "https://shiftlyn.com/" }],
     stack: [
       "React",
       "Node.js",
