@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${plexMono.variable} scroll-smooth antialiased`}
+      className={`${geistSans.variable} ${plexMono.variable} scroll-smooth antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
