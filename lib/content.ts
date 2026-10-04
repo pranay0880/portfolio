@@ -128,7 +128,7 @@ export const timeline: TimelineNode[] = [
   {
     year: "2023",
     title: "Foundations",
-    role: "Self-taught developer",
+    role: "Self-taught developer · Postgraduate, NIT Warangal",
     scope:
       "Taught myself web development through structured courses and hands-on projects, coming from a civil engineering background.",
     stack: ["JavaScript", "React", "Python", "HTML & CSS"],
@@ -137,7 +137,7 @@ export const timeline: TimelineNode[] = [
     year: "Sep 2023",
     title: "Contributor",
     role: "Full Stack Developer (SDE-1) · Aapmor",
-    scope: "Joined Aapmor shipping production features on enterprise and internal applications.",
+    scope: "Joined Aapmor, building and releasing features for enterprise and internal applications.",
     projects: [{ name: "Johnson & Johnson" }, { name: "Nexus" }],
     bullets: [
       "Modernized legacy SAP workflows into React interfaces for J&J's internal users.",

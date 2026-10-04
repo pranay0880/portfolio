@@ -121,7 +121,7 @@ export function Experience() {
         <SectionHeading
           eyebrow="Journey"
           title="How my responsibility grew"
-          description="From shipping features to building core parts of platforms, leading a frontend and designing systems."
+          description="From building features to owning core parts of platforms, leading a frontend and designing systems."
         />
 
         <div ref={containerRef} className="relative">

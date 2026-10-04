@@ -20,7 +20,7 @@ const PRESS_SCALE = 0.6;
  * scale (hover/press feedback) is spring-animated.
  *
  * Disabled (falls back to the CSS cursor) for touch devices and
- * prefers-reduced-motion.
+ * prefers-reduced-motion, matching the pattern in IntroProvider.
  */
 export function CustomCursor() {
   const [enabled, setEnabled] = useState(false);

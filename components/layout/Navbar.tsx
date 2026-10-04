@@ -11,6 +11,7 @@ import { NavbarChase } from "@/components/layout/NavbarChase";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
+import { useIntro } from "@/components/providers/IntroProvider";
 
 export const NAV_LINKS = [
   { id: "about", label: "Character" },
@@ -21,10 +22,12 @@ export const NAV_LINKS = [
 ];
 
 export function Navbar() {
+  const { introDone, introReady } = useIntro();
   const [activeId, setActiveId] = useState<string>("top");
   const [menuOpen, setMenuOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const pathname = usePathname();
+  const showNavbar = introReady && introDone;
 
   useEffect(() => {
     // "top" (the Hero section) is observed too, even though it has no nav
@@ -58,7 +61,13 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur">
+    <motion.header
+      className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur"
+      initial={false}
+      animate={showNavbar ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      aria-hidden={!showNavbar}
+    >
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/#top"
@@ -139,7 +148,7 @@ export function Navbar() {
         </div>
       </Container>
 
-      <NavbarChase active />
+      <NavbarChase active={showNavbar} />
 
       {menuOpen ? (
         <nav className="border-border bg-background border-t md:hidden">
@@ -162,6 +171,6 @@ export function Navbar() {
           </Container>
         </nav>
       ) : null}
-    </header>
+    </motion.header>
   );
 }

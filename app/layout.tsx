@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { IntroProvider } from "@/components/providers/IntroProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { IntroAnimation } from "@/components/IntroAnimation";
 import { CustomCursor } from "@/components/CustomCursor";
 import { LostZoro } from "@/components/cursor/LostZoro";
 import { profile, siteMeta } from "@/lib/content";
@@ -69,9 +71,12 @@ export default function RootLayout({
         <CustomCursor />
         <LostZoro />
         <ThemeProvider>
+          <IntroProvider>
+            <IntroAnimation />
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+          </IntroProvider>
         </ThemeProvider>
       </body>
     </html>
