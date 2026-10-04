@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FileUser, Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
@@ -9,7 +11,6 @@ import { NavbarChase } from "@/components/layout/NavbarChase";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
-import { useIntro } from "@/components/providers/IntroProvider";
 
 export const NAV_LINKS = [
   { id: "about", label: "Character" },
@@ -20,11 +21,10 @@ export const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const { introDone, introReady } = useIntro();
   const [activeId, setActiveId] = useState<string>("top");
   const [menuOpen, setMenuOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const showNavbar = introReady && introDone;
+  const pathname = usePathname();
 
   useEffect(() => {
     // "top" (the Hero section) is observed too, even though it has no nav
@@ -49,26 +49,25 @@ export function Navbar() {
 
     sections.forEach((section) => observerRef.current?.observe(section));
 
+    // Arriving from another page via /#section: jump there once the sections exist.
+    const hashTarget =
+      window.location.hash && document.getElementById(window.location.hash.slice(1));
+    if (hashTarget) hashTarget.scrollIntoView();
+
     return () => observerRef.current?.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
-    <motion.header
-      className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur"
-      initial={false}
-      animate={showNavbar ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      aria-hidden={!showNavbar}
-    >
+    <header className="border-border bg-background/80 sticky top-0 z-50 border-b backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           onClick={handleAnchorClick("top")}
           className="text-foreground flex items-center gap-2 text-base font-semibold tracking-tight"
         >
           <LogoMark id="site-logo-target" size={44} />
           <span className="whitespace-nowrap">{profile.name}</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => {
@@ -76,7 +75,7 @@ export function Navbar() {
             return (
               <a
                 key={link.id}
-                href={`#${link.id}`}
+                href={`/#${link.id}`}
                 onClick={handleAnchorClick(link.id)}
                 className={`group relative rounded-full px-4 py-2 font-mono text-sm font-medium transition-colors ${
                   isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
@@ -140,7 +139,7 @@ export function Navbar() {
         </div>
       </Container>
 
-      <NavbarChase active={showNavbar} />
+      <NavbarChase active />
 
       {menuOpen ? (
         <nav className="border-border bg-background border-t md:hidden">
@@ -148,7 +147,7 @@ export function Navbar() {
             {NAV_LINKS.map((link) => (
               <a
                 key={link.id}
-                href={`#${link.id}`}
+                href={`/#${link.id}`}
                 onClick={(event) => {
                   handleAnchorClick(link.id)(event);
                   setMenuOpen(false);
@@ -163,6 +162,6 @@ export function Navbar() {
           </Container>
         </nav>
       ) : null}
-    </motion.header>
+    </header>
   );
 }

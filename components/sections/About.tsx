@@ -11,7 +11,7 @@ import { handleAnchorClick } from "@/lib/scroll";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-16 py-16 sm:py-24">
+    <section id="about" className="scroll-mt-16 py-12 sm:py-16">
       <Container>
         <SectionHeading eyebrow="Character Arc" title="Behind the Code" />
 

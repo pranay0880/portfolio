@@ -66,8 +66,7 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
         { name: 'RESEND_API_KEY', value: 'REPLACE_ME' }
         { name: 'CONTACT_FROM_EMAIL', value: 'REPLACE_ME' }
         { name: 'CONTACT_TO_EMAIL', value: 'REPLACE_ME' }
-        { name: 'NEXT_PUBLIC_SITE_URL', value: 'https://${webAppName}.azurewebsites.net' }
-        { name: 'NEXT_PUBLIC_RESUME_URL', value: 'REPLACE_ME' }
+        { name: 'NEXT_PUBLIC_SITE_URL', value: 'https://pranaydasari.in' }
       ]
     }
   }

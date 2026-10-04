@@ -116,7 +116,7 @@ export function Experience() {
   });
 
   return (
-    <section id="experience" className="scroll-mt-16 py-16 sm:py-24">
+    <section id="experience" className="scroll-mt-16 py-12 sm:py-16">
       <Container>
         <SectionHeading
           eyebrow="Journey"

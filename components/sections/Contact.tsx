@@ -58,7 +58,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-16 py-16 sm:py-24">
+    <section id="contact" className="scroll-mt-16 py-12 sm:py-16">
       <Container>
         <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={fadeUp}>
           <SectionHeading

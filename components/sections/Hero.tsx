@@ -9,7 +9,6 @@ import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
 import { profile } from "@/lib/content";
 import { fadeUp, staggerChildren } from "@/lib/motion";
 import { handleAnchorClick } from "@/lib/scroll";
-import { useIntro } from "@/components/providers/IntroProvider";
 
 // Display face for the name only. "Japan Ramen" by Maknastudio - free for
 // personal use; a commercial licence is needed for commercial/promotional use.
@@ -20,13 +19,10 @@ const japanRamen = localFont({
 });
 
 export function Hero() {
-  const { introDone } = useIntro();
-  const show = introDone ? "show" : "hidden";
-
   return (
-    <section id="top" className="pt-16 sm:pt-24">
+    <section id="top" className="pt-4 sm:pt-8">
       <Container className="grid items-center gap-10 py-12 sm:py-20 md:grid-cols-[3fr_2fr] md:items-start">
-        <motion.div initial="hidden" animate={show} variants={staggerChildren}>
+        <motion.div initial="hidden" animate="show" variants={staggerChildren}>
           <motion.h1
             variants={fadeUp}
             className={`${japanRamen.className} text-foreground text-5xl`}
@@ -66,7 +62,7 @@ export function Hero() {
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
-          animate={introDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="justify-self-center"
         >

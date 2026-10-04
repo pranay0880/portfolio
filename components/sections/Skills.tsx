@@ -129,7 +129,7 @@ function StickyNote({
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-16 py-16 sm:py-24">
+    <section id="skills" className="scroll-mt-16 py-12 sm:py-16">
       <Container>
         <SectionHeading
           eyebrow="Abilities"

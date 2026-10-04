@@ -12,10 +12,10 @@ import {
 
 export const profile = {
   name: "Pranay Dasari",
-  title: "Full Stack Developer",
+  title: "Full Stack Engineer",
   tagline: "Full Stack Engineer · Enterprise React & Next.js",
   summary:
-    "3+ years shipping enterprise applications, modernizing SAP workflows for Johnson & Johnson with a microfrontend architecture, and leading the frontend of Liberty Dental Plan's Next.js and TypeScript apps. I own application areas end to end, build role-based systems and AI features, and mentor junior developers.",
+    "3+ years building enterprise apps: modernizing SAP workflows for a global healthcare company with microfrontends and leading the Next.js frontend for a US dental company. I own features end to end and mentor junior developers.",
   // Proof points shown under the hero summary - each backed by a project below.
   highlights: [
     "Frontend lead",
@@ -29,9 +29,9 @@ export const profile = {
     "Day to day, I work across the stack—TypeScript on the frontend, PostgreSQL and MongoDB on the backend with a focus on <strong>scalable architecture</strong> that holds up as products grow: modular frontends, cleaner data flows, and fewer surprises for the next person who touches the code.",
     "I've also built <strong>AI-powered features</strong> that make products more accessible across languages and regions, and taken on mentoring junior developers as I've grown into ownership of larger pieces of the systems I work on.",
   ],
-  location: "India, Hyderabad.",
+  location: "Hyderabad, India",
   email: "pranay0880@gmail.com",
-  resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL ?? "/resume.pdf",
+  resumeUrl: "/resume.pdf",
   social: {
     linkedin: "https://www.linkedin.com/in/pranay-dasari0880/",
     github: "https://github.com/pranay0880",
@@ -168,11 +168,12 @@ export const timeline: TimelineNode[] = [
     projects: [
       {
         name: "Liberty Dental Plan",
-        blurb: "Frontend lead on 2 apps - customer-facing and administrative - live since 2026.",
+        blurb:
+          "Frontend lead on 2 apps - customer-facing and administrative - both live in production.",
       },
     ],
     bullets: [
-      "Led the frontend of 2 Liberty Dental Plan applications in Next.js and TypeScript, taking both live in 2026.",
+      "Led the frontend of 2 Liberty Dental Plan applications in Next.js and TypeScript, taking both to production.",
       "Mentored 4 junior developers through code review and technical guidance.",
       "Set development conventions that made delivery more consistent.",
       "Turned client requirements into technical specs.",
@@ -213,6 +214,8 @@ export type CaseStudy = {
 };
 
 export type ProjectEntry = {
+  /** URL segment for the standalone case-study page at /projects/<slug>. */
+  slug: string;
   title: string;
   meta: string;
   description: string;
@@ -228,6 +231,7 @@ export type ProjectEntry = {
 
 export const projects: ProjectEntry[] = [
   {
+    slug: "liberty-dental",
     title: "Liberty Dental Plan",
     meta: "AAPMOR TECHNOLOGIES · SALES SITE & MAIN SITE · 2025 TO PRESENT",
     description:
@@ -253,7 +257,7 @@ export const projects: ProjectEntry[] = [
         "Restructured the admin flow so admins can view, edit, submit and approve changes with ease, and check every version along the way.",
       ],
       impact: [
-        "Live in 2026 - customers shop and buy plans online.",
+        "Live now - customers shop and buy plans online.",
         "Business teams update plans and content themselves, with approvals and a full audit trail.",
         "250+ automated test files gate every build in CI.",
       ],
@@ -275,6 +279,7 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
+    slug: "johnson-and-johnson",
     title: "Johnson & Johnson",
     meta: "AAPMOR TECHNOLOGIES · ENTERPRISE SAP MODERNIZATION · 2023 TO PRESENT",
     description:
@@ -319,6 +324,7 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
+    slug: "aapmor-blogs",
     title: "Aapmor Blogs",
     meta: "AAPMOR TECHNOLOGIES · FULL-STACK BLOG PLATFORM · 2024 TO PRESENT",
     description:
@@ -363,6 +369,7 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
+    slug: "performance-management-system",
     title: "Performance Management System",
     meta: "AAPMOR TECHNOLOGIES · ROLE-BASED PERFORMANCE MANAGEMENT · 2024 TO PRESENT",
     description:
@@ -409,6 +416,7 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
+    slug: "internal-tools",
     title: "Internal Tools & Side Projects",
     meta: "AAPMOR TECHNOLOGIES · MULTIPLE PROJECTS · 2023 TO PRESENT",
     description:
@@ -459,6 +467,7 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
+    slug: "portfolio",
     title: "Personal Portfolio",
     meta: "PERSONAL PROJECT · FULL-STACK PORTFOLIO · V1 (2024) & V2 (2026)",
     description:

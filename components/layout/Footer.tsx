@@ -1,15 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowUp, FileText, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
+import { ArrowUp, FileText, Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { LogoMark } from "@/components/ui/LogoMark";
-import { DrawOutlineButton } from "@/components/ui/DrawOutlineButton";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { NAV_LINKS } from "@/components/layout/Navbar";
 import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
-import { fadeUp, viewportOnce } from "@/lib/motion";
 
 const CONNECT = [
   { label: "Email", href: `mailto:${profile.email}`, icon: Mail, external: false },
@@ -38,46 +36,17 @@ export function Footer() {
       />
 
       <Container className="relative py-14">
-        {/* "To be continued..." - the episode-ending card. */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={fadeUp}
-          className="border-border bg-surface/60 flex flex-col gap-6 rounded-2xl border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"
-        >
-          <div>
-            <p className="text-muted-foreground font-mono text-xs tracking-[0.3em] uppercase">
-              Next episode
-            </p>
-            <p className="font-anime text-foreground mt-2 text-3xl sm:text-4xl">To be continued…</p>
-            <p className="text-muted-foreground mt-2 max-w-md text-sm">
-              The next arc needs a co-star. Got a project, role or idea? Let&apos;s write it
-              together.
-            </p>
-          </div>
-          <DrawOutlineButton
-            as="a"
-            href="#contact"
-            onClick={handleAnchorClick("contact")}
-            className="shrink-0 self-start sm:self-auto"
-          >
-            Start the next arc
-            <ArrowRight size={16} />
-          </DrawOutlineButton>
-        </motion.div>
-
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <a
-              href="#top"
+            <Link
+              href="/#top"
               onClick={handleAnchorClick("top")}
               className="text-foreground inline-flex items-center gap-2 text-base font-semibold"
             >
               <LogoMark size={32} />
               {profile.name}
-            </a>
+            </Link>
             <p className="text-muted-foreground mt-3 max-w-xs text-sm">{profile.tagline}</p>
             <div className="text-muted-foreground mt-4 space-y-2 text-sm">
               <p className="flex items-center gap-2">
@@ -101,7 +70,7 @@ export function Footer() {
               {NAV_LINKS.map((link) => (
                 <li key={link.id}>
                   <a
-                    href={`#${link.id}`}
+                    href={`/#${link.id}`}
                     onClick={handleAnchorClick(link.id)}
                     className="group text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm transition-colors"
                   >
@@ -139,8 +108,8 @@ export function Footer() {
           <p>
             © {year} {profile.name}. Crafted with Next.js, Tailwind &amp; a lot of anime.
           </p>
-          <a
-            href="#top"
+          <Link
+            href="/#top"
             onClick={handleAnchorClick("top")}
             className="group hover:text-primary inline-flex items-center gap-2 self-start font-mono tracking-wide uppercase transition-colors sm:self-auto"
           >
@@ -148,7 +117,7 @@ export function Footer() {
             <span className="border-border group-hover:border-primary flex h-7 w-7 items-center justify-center rounded-full border transition-all group-hover:-translate-y-0.5">
               <ArrowUp size={13} />
             </span>
-          </a>
+          </Link>
         </div>
       </Container>
     </footer>

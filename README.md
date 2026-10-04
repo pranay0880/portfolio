@@ -1,4 +1,4 @@
-# Pradeep Dasari - Portfolio
+# Pranay Dasari - Portfolio
 
 A production-ready personal portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS. The contact form is backed by a real API route, PostgreSQL (via Prisma), and Resend for email delivery. Deployment target is Azure App Service.
 
@@ -32,7 +32,6 @@ Copy `.env.example` to `.env` and fill in the values:
 | `RESEND_API_KEY` | Resend API key for sending contact-form notification emails |
 | `CONTACT_FROM_EMAIL` | Verified "from" address in Resend |
 | `CONTACT_TO_EMAIL` | Inbox that receives contact form submissions |
-| `NEXT_PUBLIC_RESUME_URL` | Link opened by the "Resume" button in the hero section |
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL, used for metadata/sitemap/OG image generation |
 
 ### 3. Local database
@@ -100,8 +99,7 @@ Infrastructure is defined in [`infra/main.bicep`](infra/main.bicep): a Linux App
      DATABASE_URL="postgresql://<admin>:<password>@<postgresServerFqdn>/portfolio?sslmode=require" \
      RESEND_API_KEY="..." \
      CONTACT_FROM_EMAIL="..." \
-     CONTACT_TO_EMAIL="..." \
-     NEXT_PUBLIC_RESUME_URL="..."
+     CONTACT_TO_EMAIL="..."
    ```
 
    (Wiring these through Key Vault references instead of plain app settings is a good follow-up hardening step - intentionally left out of this first pass.)

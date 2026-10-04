@@ -17,7 +17,7 @@ export function Projects() {
   const closeDrawer = useCallback(() => setOpen(null), []);
 
   return (
-    <section id="projects" className="scroll-mt-16 py-16 sm:py-24">
+    <section id="projects" className="scroll-mt-16 py-12 sm:py-16">
       <Container>
         <SectionHeading
           eyebrow="Quests"

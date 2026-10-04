@@ -9,9 +9,9 @@ const INTERACTIVE_SELECTOR = "a, button, [role='button'], input, textarea, selec
 // transform (never up) - upscaling would stretch the already-rasterized mask
 // and blur/fade the thin </> strokes, which is what made hover look dimmer
 // instead of bolder. Growing on hover means animating back toward scale 1.
-const NATIVE_SIZE = 40;
-const REST_SCALE = 0.7;
-const PRESS_SCALE = 0.55;
+const NATIVE_SIZE = 52;
+const REST_SCALE = 0.78;
+const PRESS_SCALE = 0.6;
 
 /**
  * Replaces the system pointer with the actual </> brand mark (same asset as
@@ -20,7 +20,7 @@ const PRESS_SCALE = 0.55;
  * scale (hover/press feedback) is spring-animated.
  *
  * Disabled (falls back to the CSS cursor) for touch devices and
- * prefers-reduced-motion, matching the pattern in IntroProvider.
+ * prefers-reduced-motion.
  */
 export function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
