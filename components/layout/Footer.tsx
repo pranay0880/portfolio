@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUp, FileText, Mail, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { LogoMark } from "@/components/ui/LogoMark";
@@ -8,6 +9,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { NAV_LINKS } from "@/components/layout/Navbar";
 import { profile } from "@/lib/content";
 import { handleAnchorClick } from "@/lib/scroll";
+import { fadeUp, viewportOnce } from "@/lib/motion";
 
 const CONNECT = [
   { label: "Email", href: `mailto:${profile.email}`, icon: Mail, external: false },
@@ -36,7 +38,22 @@ export function Footer() {
       />
 
       <Container className="relative py-14">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+        {/* "To be continued..." - the episode-ending line. No CTA here; the
+            Summon section right above already asks visitors to get in touch. */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={fadeUp}
+          className="text-center"
+        >
+          <p className="text-muted-foreground font-mono text-xs tracking-[0.3em] uppercase">
+            Next release
+          </p>
+          <p className="font-anime text-foreground mt-2 text-3xl sm:text-4xl">To be continued…</p>
+        </motion.div>
+
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
