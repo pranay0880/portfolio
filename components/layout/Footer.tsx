@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUp, FileText, Mail, MapPin } from "lucide-react";
+import { ArrowUp, FileText, Mail, MapPin, RotateCcw } from "lucide-react";
+import { useIntro } from "@/components/providers/IntroProvider";
 import { Container } from "@/components/ui/Container";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
@@ -28,6 +29,7 @@ function ColumnTitle({ children }: { children: React.ReactNode }) {
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { replay } = useIntro();
 
   return (
     <footer className="border-border relative mt-8 overflow-hidden border-t">
@@ -125,16 +127,28 @@ export function Footer() {
           <p>
             © {year} {profile.name}. Crafted with Next.js, Tailwind &amp; a lot of anime.
           </p>
-          <Link
-            href="/#top"
-            onClick={handleAnchorClick("top")}
-            className="group hover:text-primary inline-flex items-center gap-2 self-start font-mono tracking-wide uppercase transition-colors sm:self-auto"
-          >
-            Back to top
-            <span className="border-border group-hover:border-primary flex h-7 w-7 items-center justify-center rounded-full border transition-all group-hover:-translate-y-0.5">
-              <ArrowUp size={13} />
-            </span>
-          </Link>
+          <div className="flex items-center gap-6 self-start font-mono tracking-wide uppercase sm:self-auto">
+            <button
+              type="button"
+              onClick={replay}
+              className="group hover:text-primary inline-flex items-center gap-2 transition-colors"
+            >
+              Replay intro
+              <span className="border-border group-hover:border-primary flex h-7 w-7 items-center justify-center rounded-full border transition-all group-hover:-rotate-90">
+                <RotateCcw size={13} aria-hidden="true" />
+              </span>
+            </button>
+            <Link
+              href="/#top"
+              onClick={handleAnchorClick("top")}
+              className="group hover:text-primary inline-flex items-center gap-2 transition-colors"
+            >
+              Back to top
+              <span className="border-border group-hover:border-primary flex h-7 w-7 items-center justify-center rounded-full border transition-all group-hover:-translate-y-0.5">
+                <ArrowUp size={13} />
+              </span>
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>

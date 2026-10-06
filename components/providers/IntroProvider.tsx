@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export type IntroStage =
   | "tag"
@@ -19,6 +19,7 @@ type IntroContextValue = {
   target: IntroRect | null;
   introDone: boolean;
   introReady: boolean;
+  replay: () => void;
 };
 
 const IntroContext = createContext<IntroContextValue>({
@@ -26,6 +27,7 @@ const IntroContext = createContext<IntroContextValue>({
   target: null,
   introDone: true,
   introReady: false,
+  replay: () => {},
 });
 
 export function useIntro() {
@@ -88,6 +90,50 @@ export function IntroProvider({ children }: { children: React.ReactNode }) {
   const [stage, setStage] = useState<IntroStage>("done");
   const [target, setTarget] = useState<IntroRect | null>(null);
   const [introReady, setIntroReady] = useState(false);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const clearTimers = useCallback(() => {
+    timeoutsRef.current.forEach(clearTimeout);
+    timeoutsRef.current = [];
+    document.body.style.overflow = "";
+  }, []);
+
+  // Returns false if the intro couldn't start (no logo to fly to).
+  const startIntro = useCallback(() => {
+    const logoEl = document.getElementById("site-logo-target");
+    if (!logoEl) return false;
+
+    clearTimers();
+    const rect = logoEl.getBoundingClientRect();
+    setTarget({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
+    setStage("tag");
+    markIntroSeen();
+    document.body.style.overflow = "hidden";
+
+    let index = 0;
+
+    function advance() {
+      index += 1;
+      const next = STAGE_ORDER[index];
+      setStage(next);
+      if (next !== "done") {
+        timeoutsRef.current.push(setTimeout(advance, STAGE_DELAY[next]));
+      } else {
+        document.body.style.overflow = "";
+      }
+    }
+
+    timeoutsRef.current.push(setTimeout(advance, STAGE_DELAY.tag));
+    return true;
+  }, [clearTimers]);
+
+  const replay = useCallback(() => {
+    // The overlay is fixed, but the flight target is measured in viewport
+    // coordinates and the navbar is sticky, so scrolling to top keeps the
+    // page behind the intro consistent with the first-visit experience.
+    window.scrollTo({ top: 0 });
+    startIntro();
+  }, [startIntro]);
 
   useEffect(() => {
     if (hasSeenIntro() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -96,44 +142,16 @@ export function IntroProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    const logoEl = document.getElementById("site-logo-target");
-    if (!logoEl) {
-      setIntroReady(true);
-      setStage("done");
-      return;
-    }
-
-    const rect = logoEl.getBoundingClientRect();
-    setTarget({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
-    setStage("tag");
+    startIntro();
     setIntroReady(true);
-    markIntroSeen();
-    document.body.style.overflow = "hidden";
 
-    let index = 0;
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-
-    function advance() {
-      index += 1;
-      const next = STAGE_ORDER[index];
-      setStage(next);
-      if (next !== "done") {
-        timeouts.push(setTimeout(advance, STAGE_DELAY[next]));
-      } else {
-        document.body.style.overflow = "";
-      }
-    }
-
-    timeouts.push(setTimeout(advance, STAGE_DELAY.tag));
-
-    return () => {
-      timeouts.forEach(clearTimeout);
-      document.body.style.overflow = "";
-    };
-  }, []);
+    return clearTimers;
+  }, [startIntro, clearTimers]);
 
   return (
-    <IntroContext.Provider value={{ stage, target, introDone: stage === "done", introReady }}>
+    <IntroContext.Provider
+      value={{ stage, target, introDone: stage === "done", introReady, replay }}
+    >
       {children}
     </IntroContext.Provider>
   );
