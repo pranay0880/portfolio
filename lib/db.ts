@@ -1,22 +1,36 @@
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@/lib/generated/prisma/client";
+import { MongoClient, type Collection } from "mongodb";
+
+export type SubmissionStatus = "RECEIVED" | "EMAIL_SENT" | "EMAIL_FAILED";
+
+export interface ContactSubmission {
+  name: string;
+  email: string;
+  message: string;
+  ipAddress: string | null;
+  userAgent: string | null;
+  status: SubmissionStatus;
+  createdAt: Date;
+}
 
 declare global {
-  var __prisma: PrismaClient | undefined;
+  var __mongoClient: Promise<MongoClient> | undefined;
 }
 
-function createPrismaClient() {
-  // DATABASE_URL must be a plain postgres:// connection string here - this
-  // adapter is the raw `pg` driver, not Prisma's own engine. If you're using
-  // `prisma dev` locally, use the "TCP" URL from `prisma dev ls`, not the
-  // `prisma+postgres://...api_key=...` one (that's engine-only and silently
-  // disconnects when handed to `pg`).
-  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-  return new PrismaClient({ adapter });
+function getClient(): Promise<MongoClient> {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) throw new Error("MONGODB_URI is not set.");
+
+  // Cached on globalThis so dev hot-reloads and serverless warm starts reuse one connection.
+  globalThis.__mongoClient ??= new MongoClient(uri).connect();
+  return globalThis.__mongoClient;
 }
 
-export const prisma = globalThis.__prisma ?? createPrismaClient();
+export async function getDb() {
+  return (await getClient()).db();
+}
 
-if (process.env.NODE_ENV !== "production") {
-  globalThis.__prisma = prisma;
+export async function getSubmissions(): Promise<Collection<ContactSubmission>> {
+  const collection = (await getDb()).collection<ContactSubmission>("contact_submissions");
+  await collection.createIndex({ ipAddress: 1, createdAt: -1 });
+  return collection;
 }

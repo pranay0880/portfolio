@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { prisma } from "@/lib/db";
+import { getSubmissions } from "@/lib/db";
 import { contactFormSchema } from "@/lib/validation";
 import { isRateLimited } from "@/lib/rate-limit";
 import { sendContactNotification } from "@/lib/email";
@@ -45,21 +45,22 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const submission = await prisma.contactSubmission.create({
-    data: { name, email, message, ipAddress, userAgent },
+  const submissions = await getSubmissions();
+  const { insertedId } = await submissions.insertOne({
+    name,
+    email,
+    message,
+    ipAddress,
+    userAgent,
+    status: "RECEIVED",
+    createdAt: new Date(),
   });
 
   try {
     await sendContactNotification({ name, email, message });
-    await prisma.contactSubmission.update({
-      where: { id: submission.id },
-      data: { status: "EMAIL_SENT" },
-    });
+    await submissions.updateOne({ _id: insertedId }, { $set: { status: "EMAIL_SENT" } });
   } catch {
-    await prisma.contactSubmission.update({
-      where: { id: submission.id },
-      data: { status: "EMAIL_FAILED" },
-    });
+    await submissions.updateOne({ _id: insertedId }, { $set: { status: "EMAIL_FAILED" } });
 
     return NextResponse.json(
       {

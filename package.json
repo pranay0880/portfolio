@@ -9,19 +9,16 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit",
-    "postinstall": "prisma generate"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
-    "@prisma/adapter-pg": "^7.9.0",
-    "@prisma/client": "^7.9.0",
     "@react-email/components": "^1.0.12",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.26.0",
+    "mongodb": "^7.7.0",
     "next": "^16.2.11",
     "next-themes": "^0.4.6",
-    "pg": "^8.22.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-email": "^6.9.1",
@@ -32,7 +29,6 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",
@@ -41,7 +37,6 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "prisma": "^7.9.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
