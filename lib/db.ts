@@ -21,7 +21,14 @@ function getClient(): Promise<MongoClient> {
   if (!uri) throw new Error("MONGODB_URI is not set.");
 
   // Cached on globalThis so dev hot-reloads and serverless warm starts reuse one connection.
-  globalThis.__mongoClient ??= new MongoClient(uri).connect();
+  if (!globalThis.__mongoClient) {
+    const connecting = new MongoClient(uri).connect();
+    // Drop a failed attempt so the next request retries instead of reusing the rejection.
+    connecting.catch(() => {
+      if (globalThis.__mongoClient === connecting) globalThis.__mongoClient = undefined;
+    });
+    globalThis.__mongoClient = connecting;
+  }
   return globalThis.__mongoClient;
 }
 
